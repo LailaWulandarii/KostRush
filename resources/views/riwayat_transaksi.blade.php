@@ -9,14 +9,17 @@
 
     <!-- Menambahkan file CSS -->
     <link href="{{ asset('/asset/css/style_home.css')}}" rel="stylesheet">
+    {{-- <link href="{{ asset('/assets/css/styles_home.css') }}" rel="stylesheet"> --}}
 
     <!-- Menambahkan file JavaScript -->
     <link href="{{ asset('/asset/css/swiper-bundle.min.css') }}"rel="stylesheet">
 
+
+
     <!--=============== REMIXICONS ===============-->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 
-    <title>KostRush Nganjuk</title>
+    <title>Responsive Website Travel</title>
 </head>
 
 <body>
