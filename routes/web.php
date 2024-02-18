@@ -19,3 +19,9 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('home');
 });
+Route::get('/main', function () {
+    return view('main');
+});
+Route::get('/beranda', function () {
+    return view('beranda_pemilik');
+});
