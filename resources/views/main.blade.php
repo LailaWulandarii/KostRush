@@ -111,14 +111,14 @@
         ***********************************-->
         <div class="nk-sidebar">
             <div class="nk-nav-scroll">
-                <ul class="metismenu" id="menu">
+                <ul class="metismenu active" id="menu">
                     <li>
                         <a href="widgets.html" aria-expanded="false">
                             <ion-icon name="home"></ion-icon><span class="nav-text">Beranda</span>
                         </a>
                     </li>
                     <li>
-                        <a href="widgets.html" aria-expanded="false">
+                        <a href="login.blade" aria-expanded="false">
                             <ion-icon name="albums"></ion-icon><span class="nav-text">Data Kost</span>
                         </a>
                     </li>
