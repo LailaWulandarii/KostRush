@@ -13,19 +13,18 @@ return new class extends Migration
     {
         Schema::create('tb_kamar', function (Blueprint $table) {
             $table->id('id_kamar');
-            $table->unsignedBigInteger('id_kost'); // Menambahkan kolom 'id_kost' sebagai foreign key
+            $table->unsignedBigInteger('id_kost');
             $table->string('nama_kamar');
             $table->string('fasilitas_kamar');
             $table->integer('harga_bulanan');
             $table->integer('harga_harian');
             $table->timestamps();
-        
+
             $table->foreign('id_kost')
-                ->references('id_kost') // Mengacu pada kolom 'id_kost' di tabel 'kost'
+                ->references('id_kost')
                 ->on('tb_kost')
-                ->onDelete('cascade'); // Aksi ketika data di tabel 'kost' dihapus
+                ->onDelete('cascade');
         });
-        
     }
 
     /**

@@ -200,6 +200,7 @@
     <script src="{{ asset('/asset/js/datatable/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('/asset/js/datatable-init/datatable-basic.min.js') }}"></script>
 
+    
     <script src="{{ asset('/asset/plugins/chart.js/Chart.bundle.min.js') }}"></script>
     <script src="{{ asset('/asset/js/plugins-init/chartjs-init.js') }}"></script>
     <script src="{{ asset('/asset/plugins/chartist/js/chartist.min.js') }}"></script>
