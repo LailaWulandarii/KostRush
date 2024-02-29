@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Kamar;
+use App\Models\Kost;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+
 
 class HomeController extends Controller
 {
@@ -43,13 +46,13 @@ class HomeController extends Controller
     }
     public function data_kamar()
     {
-        $data = User::get();
+        $data = Kamar::get();
         return view('data_kamar', compact('data'));
         // return view('home');
     }
     public function data_kost()
     {
-        $data = User::get();
+        $data = Kost::get();
         return view('data_kost', compact('data'));
         // return view('home');
     }
