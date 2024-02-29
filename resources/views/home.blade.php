@@ -1,482 +1,280 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('main')
+@section('content')
+    <!-- Content wrapper -->
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="row">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <div class="row">
 
-    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/png">
-
-    <!-- Menambahkan file CSS -->
-    <link href="{{ asset('/asset/css/style_home.css')}}" rel="stylesheet">
-
-    <!-- Menambahkan file JavaScript -->
-    <link href="{{ asset('/asset/css/swiper-bundle.min.css') }}"rel="stylesheet">
-
-    <!--=============== REMIXICONS ===============-->
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-
-    <title>KostRush Nganjuk</title>
-</head>
-
-<body>
-    <header class="header" id="header">
-        <nav class="nav container">
-            <a href="#" class="nav__logo">Travel</a>
-
-            <div class="nav__menu" id="nav-menu">
-                <ul class="nav__list">
-                    <li class="nav__item">
-                        <a href="#home" class="nav__link active-link">Home</a>
-                    </li>
-                    <li class="nav__item">
-                        <a href="#about" class="nav__link">About</a>
-                    </li>
-                    <li class="nav__item">
-                        <a href="#discover" class="nav__link">Discover</a>
-                    </li>
-                    <li class="nav__item">
-                        <a href="#place" class="nav__link">Places</a>
-                    </li>
-                </ul>
-
-                <div class="nav__dark">
-                    <!-- Theme change button -->
-                    <span class="change-theme-name">Dark mode</span>
-                    <i class="ri-moon-line change-theme" id="theme-button"></i>
-                </div>
-
-                <i class="ri-close-line nav__close" id="nav-close"></i>
-            </div>
-
-            <div class="nav__toggle" id="nav-toggle">
-                <i class="ri-function-line"></i>
-            </div>
-        </nav>
-    </header>
-
-    <main class="main">
-        <!--==================== HOME ====================-->
-        <section class="home" id="home">
-            <img src="{{ asset('/asset/img/home1.jpg')}}" alt="" class="home__img">
-
-            <div class="home__container container grid">
-                <div class="home__data">
-                    <span class="home__data-subtitle">Discover your place</span>
-                    <h1 class="home__data-title">Explore The <br> Best <b>Beautiful <br> Beaches</b></h1>
-                    <a href="#" class="button">Explore</a>
-
-                </div>
-
-                <div class="home__social">
-                    <a href="https://www.facebook.com/" target="_blank" class="home__social-link">
-                        <i class="ri-facebook-box-fill"></i>
-                    </a>
-                    <a href="https://www.instagram.com/" target="_blank" class="home__social-link">
-                        <i class="ri-instagram-fill"></i>
-                    </a>
-                    <a href="https://twitter.com/" target="_blank" class="home__social-link">
-                        <i class="ri-twitter-fill"></i>
-                    </a>
-                </div>
-
-                <div class="home__info">
-                    <div>
-                        <span class="home__info-title">5 best places to visit</span>
-                        <a href="" class="button button--flex button--link home__info-button">
-                            More <i class="ri-arrow-right-line"></i>
-                        </a>
+                    <div class="col-6 mb-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title d-flex align-items-start justify-content-between">
+                                    <div class="avatar flex-shrink-0">
+                                        <img src="../assets/img/icons/unicons/cc-primary.png" alt="Credit Card"
+                                            class="rounded" />
+                                    </div>
+                                </div>
+                                <span class="fw-semibold d-block mb-1">Kamar Kosong</span>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="home__info-overlay">
-                        <img src="{{ asset('/asset/img/home2.jpg')}}" alt="" class="home__info-img">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!--==================== ABOUT ====================-->
-        <section class="about section" id="about">
-            <div class="about__container container grid">
-                <div class="about__data">
-                    <h2 class="section__title about__title">More Information <br> About The Best Beaches</h2>
-                    <p class="about__description">You can find the most beautiful and pleasant places at the best
-                        prices with special discounts, you choose the place we will guide you all the way to wait, get
-                        your
-                        place now.
-                    </p>
-                    <a href="#" class="button">Reserve a place</a>
-                </div>
-
-                <div class="about__img">
-                    <div class="about__img-overlay">
-                        <img src="{{ asset('/asset/img/about1.jpg')}}" alt="" class="about__img-one">
-                    </div>
-
-                    <div class="about__img-overlay">
-                        <img src="{{ asset('/asset/img/about2.jpg')}}" alt="" class="about__img-two">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!--==================== DISCOVER ====================-->
-        <section class="discover section" id="discover">
-            <h2 class="section__title">Discover the most <br> attractive places</h2>
-
-            <div class="discover__container container swiper-container">
-                <div class="swiper-wrapper">
-                    <!--==================== DISCOVER 1 ====================-->
-                    <div class="discover__card swiper-slide">
-                        <img src="{{ asset('/asset/img/discover1.jpg')}}" alt="" class="discover__img">
-                        {{-- <img src="assets_home/img/discover1.jpg" alt="" class="discover__img"> --}}
-                        <div class="discover__data">
-                            <h2 class="discover__title">Bali</h2>
-                            <span class="discover__description">24 tours available</span>
+                    <div class="col-6 mb-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title d-flex align-items-start justify-content-between">
+                                    <div class="avatar flex-shrink-0">
+                                        <img src="../assets/img/icons/unicons/cc-primary.png" alt="Credit Card"
+                                            class="rounded" />
+                                    </div>
+                                </div>
+                                <span class="fw-semibold d-block mb-1">Penghuni aktif</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!--==================== DISCOVER 2 ====================-->
-                    <div class="discover__card swiper-slide">
-                        <img src="{{ asset('/asset/img/discover2.jpg')}}" alt="" class="discover__img">
-                        {{-- <img src="assets_home/img/discover2.jpg" alt="" class="discover__img"> --}}
-                        <div class="discover__data">
-                            <h2 class="discover__title">Hawaii</h2>
-                            <span class="discover__description">15 tours available</span>
+                    {{-- <div class="col-4 mb-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title d-flex align-items-start justify-content-between">
+                                    <div class="avatar flex-shrink-0">
+                                        <img src="../assets/img/icons/unicons/cc-primary.png" alt="Credit Card"
+                                            class="rounded" />
+                                    </div>
+                                </div>
+                                <span class="fw-semibold d-block mb-1">Transactions</span>
+                            </div>
+                        </div>
+                    </div> --}}
+                    <div class="col-12 col-lg-8">
+                      <div class="card h-100">
+                          <div class="card-header d-flex align-items-center justify-content-between pb-0">
+                              <div class="card-title mb-0">
+                                  <h5 class="m-0 me-2">Order Statistics</h5>
+                                  <small class="text-muted">42.82k Total Sales</small>
+                              </div>
+                              <div class="dropdown">
+                                  <button class="btn p-0" type="button" id="orederStatistics"
+                                      data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      <i class="bx bx-dots-vertical-rounded"></i>
+                                  </button>
+                                  <div class="dropdown-menu dropdown-menu-end" aria-labelledby="orederStatistics">
+                                      <a class="dropdown-item" href="javascript:void(0);">Select All</a>
+                                      <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
+                                      <a class="dropdown-item" href="javascript:void(0);">Share</a>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="card-body">
+                              <div class="d-flex justify-content-between align-items-center mb-3">
+                                  <div class="d-flex flex-column align-items-center gap-1">
+                                      <h2 class="mb-2">8,258</h2>
+                                      <span>Total Orders</span>
+                                  </div>
+                                  <div id="orderStatisticsChart"></div>
+                              </div>
+                              <ul class="p-0 m-0">
+                                  <li class="d-flex mb-4 pb-1">
+                                      <div class="avatar flex-shrink-0 me-3">
+                                          <span class="avatar-initial rounded bg-label-primary"><i
+                                                  class="bx bx-mobile-alt"></i></span>
+                                      </div>
+                                      <div
+                                          class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                          <div class="me-2">
+                                              <h6 class="mb-0">Electronic</h6>
+                                              <small class="text-muted">Mobile, Earbuds, TV</small>
+                                          </div>
+                                          <div class="user-progress">
+                                              <small class="fw-semibold">82.5k</small>
+                                          </div>
+                                      </div>
+                                  </li>
+                                  <li class="d-flex mb-4 pb-1">
+                                      <div class="avatar flex-shrink-0 me-3">
+                                          <span class="avatar-initial rounded bg-label-success"><i
+                                                  class="bx bx-closet"></i></span>
+                                      </div>
+                                      <div
+                                          class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                          <div class="me-2">
+                                              <h6 class="mb-0">Fashion</h6>
+                                              <small class="text-muted">T-shirt, Jeans, Shoes</small>
+                                          </div>
+                                          <div class="user-progress">
+                                              <small class="fw-semibold">23.8k</small>
+                                          </div>
+                                      </div>
+                                  </li>
+                                  <li class="d-flex mb-4 pb-1">
+                                      <div class="avatar flex-shrink-0 me-3">
+                                          <span class="avatar-initial rounded bg-label-info"><i
+                                                  class="bx bx-home-alt"></i></span>
+                                      </div>
+                                      <div
+                                          class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                          <div class="me-2">
+                                              <h6 class="mb-0">Decor</h6>
+                                              <small class="text-muted">Fine Art, Dining</small>
+                                          </div>
+                                          <div class="user-progress">
+                                              <small class="fw-semibold">849k</small>
+                                          </div>
+                                      </div>
+                                  </li>
+                                  <li class="d-flex">
+                                      <div class="avatar flex-shrink-0 me-3">
+                                          <span class="avatar-initial rounded bg-label-secondary"><i
+                                                  class="bx bx-football"></i></span>
+                                      </div>
+                                      <div
+                                          class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                          <div class="me-2">
+                                              <h6 class="mb-0">Sports</h6>
+                                              <small class="text-muted">Football, Cricket Kit</small>
+                                          </div>
+                                          <div class="user-progress">
+                                              <small class="fw-semibold">99</small>
+                                          </div>
+                                      </div>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+
+                    <div class="col-4 mb-2 ">
+                        <div class="card h-100">
+                            <div class="card-header d-flex align-items-center justify-content-between">
+                                <h5 class="card-title m-0 me-2">Transactions</h5>
+                                <div class="dropdown">
+                                    <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
+                                        <a class="dropdown-item" href="javascript:void(0);">Last 28 Days</a>
+                                        <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
+                                        <a class="dropdown-item" href="javascript:void(0);">Last Year</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <ul class="p-0 m-0">
+                                    <li class="d-flex mb-4 pb-1">
+                                        <div class="avatar flex-shrink-0 me-3">
+                                            <img src="../assets/img/icons/unicons/paypal.png" alt="User"
+                                                class="rounded" />
+                                        </div>
+                                        <div
+                                            class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                            <div class="me-2">
+                                                <small class="text-muted d-block mb-1">Paypal</small>
+                                                <h6 class="mb-0">Send money</h6>
+                                            </div>
+                                            <div class="user-progress d-flex align-items-center gap-1">
+                                                <h6 class="mb-0">+82.6</h6>
+                                                <span class="text-muted">USD</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="d-flex mb-4 pb-1">
+                                        <div class="avatar flex-shrink-0 me-3">
+                                            <img src="../assets/img/icons/unicons/wallet.png" alt="User"
+                                                class="rounded" />
+                                        </div>
+                                        <div
+                                            class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                            <div class="me-2">
+                                                <small class="text-muted d-block mb-1">Wallet</small>
+                                                <h6 class="mb-0">Mac'D</h6>
+                                            </div>
+                                            <div class="user-progress d-flex align-items-center gap-1">
+                                                <h6 class="mb-0">+270.69</h6>
+                                                <span class="text-muted">USD</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="d-flex mb-4 pb-1">
+                                        <div class="avatar flex-shrink-0 me-3">
+                                            <img src="../assets/img/icons/unicons/chart.png" alt="User"
+                                                class="rounded" />
+                                        </div>
+                                        <div
+                                            class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                            <div class="me-2">
+                                                <small class="text-muted d-block mb-1">Transfer</small>
+                                                <h6 class="mb-0">Refund</h6>
+                                            </div>
+                                            <div class="user-progress d-flex align-items-center gap-1">
+                                                <h6 class="mb-0">+637.91</h6>
+                                                <span class="text-muted">USD</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="d-flex mb-4 pb-1">
+                                        <div class="avatar flex-shrink-0 me-3">
+                                            <img src="../assets/img/icons/unicons/cc-success.png" alt="User"
+                                                class="rounded" />
+                                        </div>
+                                        <div
+                                            class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                            <div class="me-2">
+                                                <small class="text-muted d-block mb-1">Credit Card</small>
+                                                <h6 class="mb-0">Ordered Food</h6>
+                                            </div>
+                                            <div class="user-progress d-flex align-items-center gap-1">
+                                                <h6 class="mb-0">-838.71</h6>
+                                                <span class="text-muted">USD</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="d-flex mb-4 pb-1">
+                                        <div class="avatar flex-shrink-0 me-3">
+                                            <img src="../assets/img/icons/unicons/wallet.png" alt="User"
+                                                class="rounded" />
+                                        </div>
+                                        <div
+                                            class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                            <div class="me-2">
+                                                <small class="text-muted d-block mb-1">Wallet</small>
+                                                <h6 class="mb-0">Starbucks</h6>
+                                            </div>
+                                            <div class="user-progress d-flex align-items-center gap-1">
+                                                <h6 class="mb-0">+203.33</h6>
+                                                <span class="text-muted">USD</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="d-flex">
+                                        <div class="avatar flex-shrink-0 me-3">
+                                            <img src="../assets/img/icons/unicons/cc-warning.png" alt="User"
+                                                class="rounded" />
+                                        </div>
+                                        <div
+                                            class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                            <div class="me-2">
+                                                <small class="text-muted d-block mb-1">Mastercard</small>
+                                                <h6 class="mb-0">Ordered Food</h6>
+                                            </div>
+                                            <div class="user-progress d-flex align-items-center gap-1">
+                                                <h6 class="mb-0">-92.45</h6>
+                                                <span class="text-muted">USD</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
 
-                    <!--==================== DISCOVER 3 ====================-->
-                    <div class="discover__card swiper-slide">
-                        <img src="{{ asset('/asset/img/discover3.jpg')}}" alt="" class="discover__img">
-                        {{-- <img src="assets_home/img/discover3.jpg" alt="" class="discover__img"> --}}
-                        <div class="discover__data">
-                            <h2 class="discover__title">Hvar</h2>
-                            <span class="discover__description">18 tours available</span>
-                        </div>
-                    </div>
 
-                    <!--==================== DISCOVER 4 ====================-->
-                    <div class="discover__card swiper-slide">
-                        <img src="{{ asset('/asset/img/discover2.jpg')}}" alt="" class="discover__img">
-                        {{-- <img src="assets_home/img/discover4.jpg" alt="" class="discover__img"> --}}
-                        <div class="discover__data">
-                            <h2 class="discover__title">Whitehaven</h2>
-                            <span class="discover__description">32 tours available</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!--==================== EXPERIENCE ====================-->
-        <section class="experience section">
-            <h2 class="section__title">With Our Experience <br> We Will Serve You</h2>
-
-            <div class="experience__container container grid">
-                <div class="experience__content grid">
-                    <div class="experience__data">
-                        <h2 class="experience__number">20</h2>
-                        <span class="experience__description">Year <br> Experience</span>
-                    </div>
-
-                    <div class="experience__data">
-                        <h2 class="experience__number">75</h2>
-                        <span class="experience__description">Complete <br> tours</span>
-                    </div>
-
-                    <div class="experience__data">
-                        <h2 class="experience__number">650+</h2>
-                        <span class="experience__description">Tourist <br> Destination</span>
-                    </div>
-                </div>
-
-                <div class="experience__img grid">
-                    <div class="experience__overlay">
-                        <img src="{{ asset('/asset/img/experience1.jpg')}}" alt="" class="experience__img-one">
-                    </div>
-
-                    <div class="experience__overlay">
-                        <img src="{{ asset('/asset/img/experience2.jpg')}}" alt="" class="experience__img-two">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!--==================== VIDEO ====================-->
-        <section class="video section">
-            <h2 class="section__title">Video Tour</h2>
-
-            <div class="video__container container">
-                <p class="video__description">Find out more with our video of the most beautiful and
-                    pleasant places for you and your family.
-                </p>
-
-                <div class="video__content">
-                    <video id="video-file">
-                        <source src="{{ asset('/asset/video/video.mp4')}}"type="video/mp4">
-\                    </video>
-
-                    <button class="button button--flex video__button" id="video-button">
-                        <i class="ri-play-line video__button-icon" id="video-icon"></i>
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!--==================== PLACES ====================-->
-        <section class="place section" id="place">
-            <h2 class="section__title">Choose Your Place</h2>
-
-            <div class="place__container container grid">
-                <!--==================== PLACES CARD 1 ====================-->
-                <div class="place__card">
-                    <img src="{{ asset('/asset/img/place1.jpg')}}" alt="" class="place__img">
-
-                    <div class="place__content">
-                        <span class="place__rating">
-                            <i class="ri-star-line place__rating-icon"></i>
-                            <span class="place__rating-number">4,8</span>
-                        </span>
-
-                        <div class="place__data">
-                            <h3 class="place__title">Bali</h3>
-                            <span class="place__subtitle">Indonesia</span>
-                            <span class="place__price">$2499</span>
-                        </div>
-                    </div>
-
-                    <button class="button button--flex place__button">
-                        <i class="ri-arrow-right-line"></i>
-                    </button>
-                </div>
-
-                <!--==================== PLACES CARD 2 ====================-->
-                <div class="place__card">
-                    <img src="{{ asset('/asset/img/place2.jpg')}}" alt="" class="place__img">
-
-                    <div class="place__content">
-                        <span class="place__rating">
-                            <i class="ri-star-line place__rating-icon"></i>
-                            <span class="place__rating-number">5,0</span>
-                        </span>
-
-                        <div class="place__data">
-                            <h3 class="place__title">Bora Bora</h3>
-                            <span class="place__subtitle">Polinesia</span>
-                            <span class="place__price">$1599</span>
-                        </div>
-                    </div>
-
-                    <button class="button button--flex place__button">
-                        <i class="ri-arrow-right-line"></i>
-                    </button>
-                </div>
-
-                <!--==================== PLACES CARD 3 ====================-->
-                <div class="place__card">
-                    <img src="{{ asset('/asset/img/place3.jpg')}}" alt="" class="place__img">
-
-                    <div class="place__content">
-                        <span class="place__rating">
-                            <i class="ri-star-line place__rating-icon"></i>
-                            <span class="place__rating-number">4,9</span>
-                        </span>
-
-                        <div class="place__data">
-                            <h3 class="place__title">Hawaii</h3>
-                            <span class="place__subtitle">EE.UU</span>
-                            <span class="place__price">$3499</span>
-                        </div>
-                    </div>
-
-                    <button class="button button--flex place__button">
-                        <i class="ri-arrow-right-line"></i>
-                    </button>
-                </div>
-
-                <!--==================== PLACES CARD 4 ====================-->
-                <div class="place__card">
-                    <img src="{{ asset('/asset/img/place4.jpg')}}" alt="" class="place__img">
-
-                    <div class="place__content">
-                        <span class="place__rating">
-                            <i class="ri-star-line place__rating-icon"></i>
-                            <span class="place__rating-number">4,8</span>
-                        </span>
-
-                        <div class="place__data">
-                            <h3 class="place__title">Whitehaven</h3>
-                            <span class="place__subtitle">Australia</span>
-                            <span class="place__price">$2499</span>
-                        </div>
-                    </div>
-
-                    <button class="button button--flex place__button">
-                        <i class="ri-arrow-right-line"></i>
-                    </button>
-                </div>
-
-                <!--==================== PLACES CARD 5 ====================-->
-                <div class="place__card">
-                    <img src="{{ asset('/asset/img/place5.jpg')}}" alt="" class="place__img">
-
-                    <div class="place__content">
-                        <span class="place__rating">
-                            <i class="ri-star-line place__rating-icon"></i>
-                            <span class="place__rating-number">4,8</span>
-                        </span>
-
-                        <div class="place__data">
-                            <h3 class="place__title">Hvar</h3>
-                            <span class="place__subtitle">Croacia</span>
-                            <span class="place__price">$1999</span>
-                        </div>
-                    </div>
-
-                    <button class="button button--flex place__button">
-                        <i class="ri-arrow-right-line"></i>
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!--==================== SUBSCRIBE ====================-->
-        <section class="subscribe section">
-            <div class="subscribe__bg">
-                <div class="subscribe__container container">
-                    <h2 class="section__title subscribe__title">Subscribe Our <br> Newsletter</h2>
-                    <p class="subscribe__description">Subscribe to our newsletter and get a
-                        special 30% discount.
-                    </p>
-
-                    <form action="" class="subscribe__form">
-                        <input type="text" placeholder="Enter email" class="subscribe__input">
-
-                        <button class="button">
-                            Subscribe
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </section>
-
-        <!--==================== SPONSORS ====================-->
-        <section class="sponsor section">
-            <div class="sponsor__container container grid">
-                <div class="sponsor__content">
-                    <img src="{{ asset('/asset/img/sponsors1.png')}}" alt="" class="sponsor__img">
-                </div>
-                <div class="sponsor__content">
-                    <img src="{{ asset('/asset/img/sponsors2.png')}}" alt="" class="sponsor__img">
-                </div>
-                <div class="sponsor__content">
-                    <img src="{{ asset('/asset/img/sponsors3.png')}}" alt="" class="sponsor__img">
-                </div>
-                <div class="sponsor__content">
-                    <img src="{{ asset('/asset/img/sponsors4.png')}}" alt="" class="sponsor__img">
-                </div>
-                <div class="sponsor__content">
-                    <img src="{{ asset('/asset/img/sponsors5.png')}}" alt="" class="sponsor__img">
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!--==================== FOOTER ====================-->
-    <footer class="footer section">
-        <div class="footer__container container grid">
-            <div class="footer__content grid">
-                <div class="footer__data">
-                    <h3 class="footer__title">Travel</h3>
-                    <p class="footer__description">Travel you choose the <br> destination,
-                        we offer you the <br> experience.
-                    </p>
-                    <div>
-                        <a href="https://www.facebook.com/" target="_blank" class="footer__social">
-                            <i class="ri-facebook-box-fill"></i>
-                        </a>
-                        <a href="https://twitter.com/" target="_blank" class="footer__social">
-                            <i class="ri-twitter-fill"></i>
-                        </a>
-                        <a href="https://www.instagram.com/" target="_blank" class="footer__social">
-                            <i class="ri-instagram-fill"></i>
-                        </a>
-                        <a href="https://www.youtube.com/" target="_blank" class="footer__social">
-                            <i class="ri-youtube-fill"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="footer__data">
-                    <h3 class="footer__subtitle">About</h3>
-                    <ul>
-                        <li class="footer__item">
-                            <a href="" class="footer__link">About Us</a>
-                        </li>
-                        <li class="footer__item">
-                            <a href="" class="footer__link">Features</a>
-                        </li>
-                        <li class="footer__item">
-                            <a href="" class="footer__link">New & Blog</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="footer__data">
-                    <h3 class="footer__subtitle">Company</h3>
-                    <ul>
-                        <li class="footer__item">
-                            <a href="" class="footer__link">Team</a>
-                        </li>
-                        <li class="footer__item">
-                            <a href="" class="footer__link">Plan y Pricing</a>
-                        </li>
-                        <li class="footer__item">
-                            <a href="" class="footer__link">Become a member</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="footer__data">
-                    <h3 class="footer__subtitle">Support</h3>
-                    <ul>
-                        <li class="footer__item">
-                            <a href="" class="footer__link">FAQs</a>
-                        </li>
-                        <li class="footer__item">
-                            <a href="" class="footer__link">Support Center</a>
-                        </li>
-                        <li class="footer__item">
-                            <a href="" class="footer__link">Contact Us</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="footer__rights">
-                <p class="footer__copy">&#169; 2021 Bedimcode. All rigths reserved.</p>
-                <div class="footer__terms">
-                    <a href="#" class="footer__terms-link">Terms & Agreements</a>
-                    <a href="#" class="footer__terms-link">Privacy Policy</a>
                 </div>
             </div>
         </div>
-    </footer>
-
-    <!--========== SCROLL UP ==========-->
-    <a href="#" class="scrollup" id="scroll-up">
-        <i class="ri-arrow-up-line scrollup__icon"></i>
-    </a>
-
-    <!--=============== SCROLL REVEAL===============-->
-    <script src="{{ asset('/asset/js/scrollreveal.min.js')}}"></script>
-
-    <!--=============== SWIPER JS ===============-->
-    <script src="{{ asset('/asset/js/swiper-bundle.min.js')}}"></script>
-
-    <!--=============== MAIN JS ===============-->
-    <script src="{{ asset('/asset/js/main_home.js')}}"></script>
-</body>
-
-</html>
+        <div class="row">
+        </div>
+    </div>
+    <!-- / Content -->
+@endsection
