@@ -17,22 +17,46 @@ class HomeController extends Controller
         return view('index', compact('data'));
         // return view('home');
     }
+    public function home()
+    {
+        $data = User::get();
+        return view('home', compact('data'));
+        // return view('home');
+    }
+    public function main()
+    {
+        $data = User::get();
+        return view('main', compact('data'));
+        // return view('home');
+    }
     public function login()
     {
         $data = User::get();
         return view('login', compact('data'));
         // return view('home');
     }
-    public function peminjaman()
+    public function data_penghuni()
     {
         $data = User::get();
-        return view('peminjaman', compact('data'));
+        return view('data_penghuni', compact('data'));
         // return view('home');
     }
-    public function katalog()
+    public function data_kamar()
     {
         $data = User::get();
-        return view('katalog', compact('data'));
+        return view('data_kamar', compact('data'));
+        // return view('home');
+    }
+    public function data_kost()
+    {
+        $data = User::get();
+        return view('data_kost', compact('data'));
+        // return view('home');
+    }
+    public function transaksi()
+    {
+        $data = User::get();
+        return view('transaksi', compact('data'));
         // return view('home');
     }
     public function profile()
@@ -41,18 +65,7 @@ class HomeController extends Controller
 
         return view('profile'); // Ganti 'profile' dengan nama file view yang sesuai
     }
-    public function donasi()
-    {
-        $data = User::get();
-        return view('donasi', compact('data'));
-        // return view('home');
-    }
-    public function verifikasi()
-    {
-        $data = User::get();
-        return view('verifikasi', compact('data'));
-        // return view('home');
-    }
+
     public function dashboard()
     {
         // $data = User::get();
