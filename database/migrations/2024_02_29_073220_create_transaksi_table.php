@@ -21,6 +21,7 @@ return new class extends Migration
             $table->dateTime('tanggal_masuk');
             $table->timestamps();
         
+        
             $table->foreign('id_kamar')
                 ->references('id_kamar')
                 ->on('kamar')
