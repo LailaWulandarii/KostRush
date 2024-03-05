@@ -38,10 +38,16 @@ class HomeController extends Controller
         return view('login', compact('data'));
         // return view('home');
     }
-    public function data_penghuni()
+    public function penghuni()
     {
         $data = User::get();
-        return view('data_penghuni', compact('data'));
+        return view('penghuni', compact('data'));
+        // return view('home');
+    }
+    public function crate_penghuni()
+    {
+        $data = User::get();
+        return view('create_penghuni', compact('data'));
         // return view('home');
     }
     public function data_kamar()

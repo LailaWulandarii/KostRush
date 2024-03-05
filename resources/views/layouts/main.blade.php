@@ -134,7 +134,7 @@
                     </li>
                     <!-- Dashboard -->
                     <li class="menu-item ">
-                        <a href="{{ 'data_penghuni' }}" class="menu-link">
+                        <a href="{{ 'penghuni' }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-group"></i>
                             <div data-i18n="Analytics">Data Penghuni</div>
                         </a>
