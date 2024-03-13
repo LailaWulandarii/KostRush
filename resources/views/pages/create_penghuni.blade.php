@@ -9,9 +9,10 @@
                         <h5 class="mb-0">{{ isset($user) ? 'Edit' : 'Tambah' }} Penghuni</h5>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ isset($user) ? route('users.update', $user->id) : route('users.store') }}">
+                        <form method="POST"
+                            action="{{ isset($user) ? route('users.update', $user->id) : route('users.store') }}">
                             @csrf
-                            @if(isset($user))
+                            @if (isset($user))
                                 @method('PUT')
                             @endif
                             <div class="row mb-3">
@@ -55,7 +56,6 @@
                                         <span id="basic-icon-default-phone2" class="input-group-text"><i
                                                 class="bx bx-phone"></i></span>
                                         <input type="text" id="no_hp" name="no_hp" class="form-control phone-mask"
-                                            placeholder="658 799 8941" aria-label="658 799 8941"
                                             aria-describedby="basic-icon-default-phone2"
                                             value="{{ isset($user) ? $user->no_hp : '' }}" />
                                     </div>
@@ -69,8 +69,12 @@
                                         <select id="jenis_kelamin" name="jenis_kelamin" id="defaultSelect"
                                             class="form-select">
                                             <option>Pilih Jenis Kelamin</option>
-                                            <option value="laki-laki" {{ isset($user) && $user->jenis_kelamin == 'laki-laki' ? 'selected' : '' }}>Laki-laki</option>
-                                            <option value="perempuan" {{ isset($user) && $user->jenis_kelamin == 'perempuan' ? 'selected' : '' }}>Perempuan</option>
+                                            <option value="laki-laki"
+                                                {{ isset($user) && $user->jenis_kelamin == 'laki-laki' ? 'selected' : '' }}>
+                                                Laki-laki</option>
+                                            <option value="perempuan"
+                                                {{ isset($user) && $user->jenis_kelamin == 'perempuan' ? 'selected' : '' }}>
+                                                Perempuan</option>
                                         </select>
                                     </div>
                                 </div>
@@ -81,7 +85,7 @@
                                     <div class="input-group input-group-merge">
                                         <span class="input-group-text"><i class="bx bx-envelope"></i></span>
                                         <input type="text" id="email" name="email" class="form-control"
-                                            placeholder="Masukkan alamat emailmu" aria-label="john.doe"
+                                            placeholder="Masukkan alamat emailmu"
                                             aria-describedby="basic-icon-default-email2"
                                             value="{{ isset($user) ? $user->email : '' }}" />
                                         <span id="basic-icon-default-email2" class="input-group-text">@gmail.com</span>
@@ -95,7 +99,7 @@
                                     <div class="input-group input-group-merge">
                                         <span class="input-group-text"><i class="bx bx-lock"></i></span>
                                         <input type="text" id="password" name="password" class="form-control"
-                                            placeholder="Masukkan kata sandimu" aria-label="john.doe"
+                                            placeholder="Masukkan kata sandimu"
                                             aria-describedby="basic-icon-default-email2" />
                                     </div>
                                 </div>

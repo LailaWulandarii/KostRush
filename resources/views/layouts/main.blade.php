@@ -120,14 +120,14 @@
                     </li>
                     <!-- Dashboard -->
                     <li class="menu-item ">
-                        <a href="{{ 'data_kost' }}" class="menu-link">
+                        <a href="{{ 'data-kost' }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-building-house"></i>
                             <div data-i18n="Analytics">Data Kost</div>
                         </a>
                     </li>
                     <!-- Dashboard -->
                     <li class="menu-item ">
-                        <a href="{{ 'data_kamar' }}" class="menu-link">
+                        <a href="{{ 'data-kamar' }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-bed"></i>
                             <div data-i18n="Analytics">Data kamar</div>
                         </a>
