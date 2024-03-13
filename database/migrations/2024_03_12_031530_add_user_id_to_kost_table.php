@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('alamat')->nullable();
-            $table->date('tgl_lahir')->nullable();
-            $table->string('no_hp')->nullable();
-            $table->enum('jenis_kelamin', ['laki-laki', 'perempuan'])->nullable();
+        Schema::table('kost', function (Blueprint $table) {
+            $table->foreignId('id')->constrained('users')->onDelete('cascade');
         });
     }
 
@@ -24,8 +21,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
+        Schema::table('kost', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+            $table->dropColumn('user_id');
         });
     }
 };
