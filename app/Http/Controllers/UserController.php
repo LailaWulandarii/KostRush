@@ -49,7 +49,6 @@ class UserController extends Controller
 
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        // Tambahkan field lain sesuai kebutuhan
 
         $user->save();
 
@@ -61,18 +60,12 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        // Tambahkan respons JSON jika ingin memberikan respons ke frontend
         return redirect()->back()->with('status', 'data berhasil dihapus');
     }
-    // public function show($id)
-    // {
-    //     $user = User::findOrFail($id);
-    //     return view('pages.create_penghuni', ['user' => $user]);
-    // }
+
     public function show($id)
     {
         $user = User::findOrFail($id);
         return view('pages.create_penghuni', compact('user'));
     }
-    
 }

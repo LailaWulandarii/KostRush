@@ -36,30 +36,5 @@ class LoginController extends Controller
         return redirect()->route('login')->with('success', 'Kamu berhasil logout');
     }
 
-    public function register()
-    {
-        return view('auth.register');
-    }
 
-    public function register_proses(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6',
-        ]);
-
-        $user = User::create([
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        if ($user) {
-            $credentials = $request->only('email', 'password'); 
-            if (Auth::attempt($credentials)) {
-                return redirect()->route('home');
-            }
-        }
-
-        return redirect()->route('login')->with('failed', 'Registrasi gagal. Silakan coba lagi.');
-    }
 }

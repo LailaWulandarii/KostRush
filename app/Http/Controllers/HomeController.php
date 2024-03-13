@@ -23,7 +23,7 @@ class HomeController extends Controller
     public function home()
     {
         $data = User::get();
-        return view('home', compact('data'));
+        return view('pages.home', compact('data'));
         // return view('home');
     }
     public function main()
@@ -41,31 +41,31 @@ class HomeController extends Controller
     public function penghuni()
     {
         $data = User::get();
-        return view('penghuni', compact('data'));
+        return view('pages.penghuni', compact('data'));
         // return view('home');
     }
     public function crate_penghuni()
     {
         $data = User::get();
-        return view('create_penghuni', compact('data'));
+        return view('pages.create_penghuni', compact('data'));
         // return view('home');
     }
-    public function data_kamar()
+    public function kamar()
     {
         $data = Kamar::get();
-        return view('data_kamar', compact('data'));
+        return view('pages.kamar', compact('data'));
         // return view('home');
     }
-    public function data_kost()
+    public function kost()
     {
         $data = Kost::get();
-        return view('data_kost', compact('data'));
+        return view('pages.kost', compact('data'));
         // return view('home');
     }
     public function transaksi()
     {
         $data = User::get();
-        return view('transaksi', compact('data'));
+        return view('pages.transaksi', compact('data'));
         // return view('home');
     }
     public function profile()
