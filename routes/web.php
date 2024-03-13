@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 
 Route::redirect('/', '/login');
 
@@ -17,7 +18,7 @@ Route::post('/register_proses', [RegisterController::class, 'register_proses'])-
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/create_penghuni', [UserController::class, 'create_penghuni'])->name('pages.create_penghuni');
+    Route::get('/create-penghuni', [UserController::class, 'create_penghuni'])->name('pages.create-penghuni');
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
     Route::get('/home', [HomeController::class, 'home'])->name('home');
     Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
@@ -29,4 +30,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/data-kamar', [HomeController::class, 'kamar'])->name('kamar');
     Route::get('/data-kost', [HomeController::class, 'kost'])->name('kost');
     Route::get('/transaksi', [HomeController::class, 'transaksi'])->name('transaksi');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 });
