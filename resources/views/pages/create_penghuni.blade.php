@@ -27,9 +27,9 @@
                                             value="{{ isset($user) ? $user->name : '' }}" />
                                     </div>
                                 </div>
-                                {{-- @error('email')
-                                <small>{{$message}}</small>
-                                @enderror --}}
+                                    @error('name')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 form-label" for="alamat">Alamat</label>
@@ -41,6 +41,9 @@
                                             aria-describedby="basic-icon-default-message2">{{ isset($user) ? $user->alamat : '' }}</textarea>
                                     </div>
                                 </div>
+                                @error('alamat')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="mb-3 row">
                                 <label for="tgl_lahir" class="col-sm-2 col-form-label">Tangal Lahir</label>
@@ -48,6 +51,9 @@
                                     <input class="form-control" type="date" id="tgl_lahir" name="tgl_lahir"
                                         value="{{ isset($user) ? $user->tgl_lahir : '' }}" />
                                 </div>
+                                @error('tgl_lahir')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 form-label" for="no_hp">Nomor Hp</label>
@@ -60,6 +66,9 @@
                                             value="{{ isset($user) ? $user->no_hp : '' }}" />
                                     </div>
                                 </div>
+                                @error('no_hp')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="jenis_kelamin">Jenis
@@ -78,6 +87,9 @@
                                         </select>
                                     </div>
                                 </div>
+                                @error('jenis_kelamin')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="email">Email</label>
@@ -90,8 +102,10 @@
                                             value="{{ isset($user) ? $user->email : '' }}" />
                                         <span id="basic-icon-default-email2" class="input-group-text">@gmail.com</span>
                                     </div>
-                                    {{-- <div class="form-text">You can use letters, numbers & periods</div> --}}
                                 </div>
+                                @error('email')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="password">Kata Sandi</label>
@@ -103,6 +117,9 @@
                                             aria-describedby="basic-icon-default-email2" />
                                     </div>
                                 </div>
+                                @error('password')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <!-- Tambahkan input lainnya -->
                             <div class="row justify-content-end">
