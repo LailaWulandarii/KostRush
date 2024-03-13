@@ -6,7 +6,7 @@
             <div class="card">
                 <h5 class="card-header">Data Penghuni</h5>
                 <div class="table-responsive text-nowrap">
-                    <a href="{{ route('pages.create_penghuni') }}" class="btn btn-primary" style="margin-left: 20px;">
+                    <a href="{{ route('pages.create-penghuni') }}" class="btn btn-primary" style="margin-left: 20px;">
                         <span class="tf-icons bx bx-user-plus"></span>&nbsp; Tambah Penghuni
                     </a>
                     <table class="table table-hover">
