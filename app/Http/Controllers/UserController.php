@@ -14,21 +14,26 @@ class UserController extends Controller
     }
     public function store(Request $request)
     {
+        $message = [
+            'required' => 'Data wajib diisi!',
+            'min' => 'Data harus diisi minimal :min karakter!',
+            'max' => 'Data harus diisi maksimal :max karakter!',
+        ];
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|string|min:5|max:255',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6',
-            'alamat' => 'required',
-            'tgl_lahir' => 'required',
-            'no_hp' => 'required',
+            'password' => ['required', 'string', 'min:6', 'max:255', 'regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/'],
+            'alamat' => 'required|string|min:15|max:255',
+            'tgl_lahir' => 'required|date',
+            'no_hp' => ['required', 'string', 'max:15', 'regex:/^(08|\+62)\d{9,13}$/'],
             'jenis_kelamin' => 'required',
-        ]);
+        ], $message);
 
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
-        $user->role = 'penyewa'; // Tetapkan peran secara langsung
+        $user->role = 'penyewa';
         $user->alamat = $request->alamat;
         $user->tgl_lahir = $request->tgl_lahir;
         $user->no_hp = $request->no_hp;
