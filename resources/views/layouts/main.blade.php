@@ -112,45 +112,44 @@
 
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
-                    <li class="menu-item active">
-                        <a href="{{ 'home' }}" class="menu-link">
+                    <li class="menu-item {{ Request::is('home') ? 'active' : '' }}">
+                        <a href="{{ url('home') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Beranda</div>
                         </a>
                     </li>
                     <!-- Dashboard -->
-                    <li class="menu-item ">
-                        <a href="{{ 'data-kost' }}" class="menu-link">
+                    <li class="menu-item {{ Request::is('data-kost') ? 'active' : '' }}">
+                        <a href="{{ url('data-kost') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-building-house"></i>
                             <div data-i18n="Analytics">Data Kost</div>
                         </a>
                     </li>
                     <!-- Dashboard -->
-                    <li class="menu-item ">
-                        <a href="{{ 'data-kamar' }}" class="menu-link">
+                    <li class="menu-item {{ Request::is('data-kamar') ? 'active' : '' }}">
+                        <a href="{{ url('data-kamar') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-bed"></i>
                             <div data-i18n="Analytics">Data kamar</div>
                         </a>
-                    </li>
-                    <!-- Dashboard -->
-                    <li class="menu-item ">
-                        <a href="{{ 'penghuni' }}" class="menu-link">
+                    <li class="menu-item {{ Request::is('penghuni') ? 'active' : '' }}">
+                        <a href="{{ url('penghuni') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-group"></i>
                             <div data-i18n="Analytics">Data Penghuni</div>
                         </a>
-                    </li>
-                    <li class="menu-item ">
+                    </li>   
+                    <li class="menu-item {{ Request::routeIs('transaksi') ? 'active' : '' }}">
                         <a href="{{ route('transaksi') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-calculator"></i>
                             <div data-i18n="Analytics">Transaksi</div>
                         </a>
                     </li>
-                    <li class="menu-item ">
+                    <li class="menu-item {{ Request::is('logout') ? 'active' : '' }}">
                         <a href="{{ route('logout') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-log-out"></i>
                             <div data-i18n="Analytics">Logout</div>
                         </a>
                     </li>
+
 
 
                     <!-- Components -->
