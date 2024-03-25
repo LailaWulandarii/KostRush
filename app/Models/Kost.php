@@ -23,7 +23,6 @@ class Kost extends Model
         'nama_rek',
     ];
 
-    // Relasi dengan model Kamar
     public function kamars()
     {
         return $this->hasMany(Kamar::class, 'id_kost', 'id_kost');

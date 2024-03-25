@@ -26,4 +26,5 @@ class Kamar extends Model
     {
         return $this->belongsTo(Kost::class, 'id_kost', 'id_kost');
     }
+    
 }
