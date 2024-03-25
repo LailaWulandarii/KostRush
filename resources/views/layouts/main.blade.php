@@ -8,7 +8,7 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>@yield('title') | KostRush</title>
 
     <meta name="description" content="" />
 
@@ -119,15 +119,15 @@
                         </a>
                     </li>
                     <!-- Dashboard -->
-                    <li class="menu-item {{ Request::is('data-kost') ? 'active' : '' }}">
-                        <a href="{{ url('data-kost') }}" class="menu-link">
+                    <li class="menu-item {{ Request::is('kost') ? 'active' : '' }}">
+                        <a href="{{ url('kost') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-building-house"></i>
                             <div data-i18n="Analytics">Data Kost</div>
                         </a>
                     </li>
                     <!-- Dashboard -->
-                    <li class="menu-item {{ Request::is('data-kamar') ? 'active' : '' }}">
-                        <a href="{{ url('data-kamar') }}" class="menu-link">
+                    <li class="menu-item {{ Request::is('kamar') ? 'active' : '' }}">
+                        <a href="{{ url('kamar') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-bed"></i>
                             <div data-i18n="Analytics">Data kamar</div>
                         </a>
@@ -136,27 +136,19 @@
                             <i class="menu-icon tf-icons bx bx-group"></i>
                             <div data-i18n="Analytics">Data Penghuni</div>
                         </a>
-                    </li>   
-                    <li class="menu-item {{ Request::routeIs('transaksi') ? 'active' : '' }}">
-                        <a href="{{ route('transaksi') }}" class="menu-link">
+                    </li>
+                    <li class="menu-item {{ Request::Is('transaksi') ? 'active' : '' }}">
+                        <a href="{{ url('transaksi') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-calculator"></i>
                             <div data-i18n="Analytics">Transaksi</div>
                         </a>
                     </li>
-                    <li class="menu-item {{ Request::is('logout') ? 'active' : '' }}">
-                        <a href="{{ route('logout') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-log-out"></i>
-                            <div data-i18n="Analytics">Logout</div>
+                    <li class="menu-item {{ Request::Is('riwayat-transaksi') ? 'active' : '' }}">
+                        <a href="{{ url('riwayat-transaksi') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-history"></i>
+                            <div data-i18n="Analytics">Riwayat Transaksi</div>
                         </a>
                     </li>
-
-
-
-                    <!-- Components -->
-                    {{-- <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li> --}}
-
-                    <!-- Extended components -->
-
                 </ul>
             </aside>
             <!-- / Menu -->
@@ -207,8 +199,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
-                                                    <span class="fw-semibold d-block">John Doe</span>
-                                                    <small class="text-muted">Admin</small>
+                                                    <span class="fw-semibold d-block">{{ Auth::user()->name }}</span>
+                                                    <small class="text-muted">{{ Auth::user()->role }}</small>
                                                 </div>
                                             </div>
                                         </a>
@@ -217,35 +209,18 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item" href=""{{ route('profil') }}"">
                                             <i class="bx bx-user me-2"></i>
-                                            <span class="align-middle">My Profile</span>
+                                            <span class="align-middle">Profil</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="bx bx-cog me-2"></i>
-                                            <span class="align-middle">Settings</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <span class="d-flex align-items-center align-middle">
-                                                <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                                                <span class="flex-grow-1 align-middle">Billing</span>
-                                                <span
-                                                    class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <div class="dropdown-divider"></div>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="auth-login-basic.html">
-                                            <i class="bx bx-power-off me-2"></i>
-                                            <span class="align-middle">Log Out</span>
-                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="get">
+                                            @csrf
+                                            <button type="submit" class="dropdown-item">
+                                                <i class="bx bx-log-out me-2"></i> Logout
+                                            </button>
+                                        </form>
                                     </li>
                                 </ul>
                             </li>
@@ -253,7 +228,6 @@
                         </ul>
                     </div>
                 </nav>
-
                 <!-- / Navbar -->
 
                 @yield('content')
