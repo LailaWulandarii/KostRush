@@ -11,55 +11,18 @@ class TransaksiController extends Controller
 {
     public function index()
     {
-        return view('auth.login');
+        // Mengambil data penghuni kost dengan peran 'penyewa'
+        $penyewa = User::where('role', 'penyewa')->get();
+
+        // Mengirim data ke view
+        return view('pages.transaksi', ['penyewa' => $penyewa]);
     }
-
-    public function login_proses(Request $request)
+    public function riwayat()
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
+        // Mengambil data penghuni kost dengan peran 'penyewa'
+        $penyewa = User::where('role', 'penyewa')->get();
 
-        $credentials = $request->only('email', 'password'); // ganti $data menjadi $credentials
-
-        if (Auth::attempt($credentials)) {
-            return redirect()->route('home');
-        } else {
-            return redirect()->route('login')->with('failed', 'Email atau Password salah');
-        }
-    }
-
-    public function logout()
-    {
-        Auth::logout();
-        return redirect()->route('login')->with('success', 'Kamu berhasil logout');
-    }
-
-    public function register()
-    {
-        return view('auth.register');
-    }
-
-    public function register_proses(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6',
-        ]);
-
-        $user = User::create([
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        if ($user) {
-            $credentials = $request->only('email', 'password'); // ganti $login menjadi $credentials
-            if (Auth::attempt($credentials)) {
-                return redirect()->route('home');
-            }
-        }
-
-        return redirect()->route('login')->with('failed', 'Registrasi gagal. Silakan coba lagi.');
+        // Mengirim data ke view
+        return view('pages.historyTransaksi', ['penyewa' => $penyewa]);
     }
 }
