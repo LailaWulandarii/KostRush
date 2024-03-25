@@ -16,7 +16,6 @@ class LoginController extends Controller
 
     public function login_proses(Request $request)
     {
-
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
@@ -25,7 +24,12 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            $request->session()->put('user_email', $request->email);
+
+            // Tambahkan kode berikut untuk mendapatkan ID Kost dari pengguna yang berhasil login
+            $id_kost = Auth::user()->id_kost;
+
+            // Tambahkan kode berikut untuk menyetel nilai 'id_kost' dalam sesi
+            $request->session()->put('id_kost', $id_kost);
 
             return redirect()->route('home');
         } else {
@@ -33,9 +37,14 @@ class LoginController extends Controller
         }
     }
 
-
-    public function logout()
+    public function email()
     {
+        return view('auth.email');
+    }
+
+    public function logout(Request $request)
+    {
+        $request->session()->forget('id_kost');
         Auth::logout();
         return redirect()->route('login')->with('success', 'Kamu berhasil logout');
     }
