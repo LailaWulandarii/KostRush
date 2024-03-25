@@ -8,7 +8,7 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Login Basic - Pages | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Register | KostRush</title>
 
     <meta name="description" content="" />
 
@@ -111,32 +111,46 @@
                         <h4 class="mb-2">Selamat Datang di KostRush! 👋</h4>
                         <p class="mb-4">Daftarkan dirimu terlebih dahulu!</p>
 
-                        <form id="formAuthentication" class="mb-3" action="{{ 'register_proses' }}" method="POST">
+                        <form id="formAuthentication" class="mb-3" action="{{ route('register_proses') }}"
+                            method="POST">
                             @csrf
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Nama Lengkap</label>
+                                <input type="text" class="form-control" id="name" name="name"
+                                    placeholder="Masukkan nama lengkapmu" value="{{ old('name') }}" />
+                                @error('name')
+                                    <small>{{ $message }}</small>
+                                @enderror
+                            </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
                                 <input type="text" class="form-control" id="email" name="email"
-                                    placeholder="Masukkan emailmu" value="{{old('email')}}" />
+                                    placeholder="Masukkan emailmu" value="{{ old('email') }}" />
+                                @error('email')
+                                    <small>{{ $message }}</small>
+                                @enderror
                             </div>
-                            @error('email')
-                                <small>{{ $message }}</small>
-                            @enderror
                             <div class="mb-3 form-password-toggle">
-                                <label class="form-label" for="password">Password</label>
+                                <label class="form-label" for="password">Kata Sandi</label>
                                 <div class="input-group input-group-merge">
                                     <input type="password" id="password" class="form-control" name="password"
-                                    placeholder="Masukkan kata sandimu"
-                                        {{-- placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" --}}
-                                        aria-describedby="password" />
+                                        placeholder="Masukkan kata sandimu" />
                                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                                 </div>
                             </div>
-                            @error('password')
-                                <small>{{ $message }}</small>
-                            @enderror
+                            <div class="mb-3 form-password-toggle">
+                                <label class="form-label" for="password_confirmation">Konfirmasi Kata Sandi</label>
+                                <div class="input-group input-group-merge">
+                                    <input type="password" id="password_confirmation" class="form-control"
+                                        name="password_confirmation" placeholder="Konfirmasi kata sandimu" />
+                                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                                </div>
+                                @error('password')
+                                    <small>{{ $message }}</small>
+                                @enderror
 
-                            <div class="mb-3">
-                                {{-- <div class="form-check">
+                                <div class="mb-3">
+                                    {{-- <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="terms-conditions"
                                         name="terms" />
                                     <label class="form-check-label" for="terms-conditions">
@@ -144,8 +158,8 @@
                                         <a href="javascript:void(0);">privacy policy & terms</a>
                                     </label>
                                 </div> --}}
-                            </div>
-                            <button class="btn btn-primary d-grid w-100">Daftar</button>
+                                </div>
+                                <button  type="submit" class="btn btn-primary d-grid w-100">Daftar</button>
                         </form>
 
                         <p class="text-center">

@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', 'Data Kost')
 @section('content')
     <div class="content-wrapper">
 

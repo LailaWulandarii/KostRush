@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', 'Data Kamar')
 @section('content')
     <div class="content-wrapper">
 
@@ -20,11 +21,11 @@
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
-                            @foreach ($data as $d)
+                            @foreach ($kamars as $kamar)
                                 <tr>
-                                    <td>{{ $d->nama_kamar }}</td>
-                                    <td>{{ $d->fasilitas_kamar }}</td>
-                                    <td>{{ $d->status }}</td>
+                                    <td>{{ $kamar->nama_kamar }}</td>
+                                    <td>{{ $kamar->fasilitas_kamar }}</td>
+                                    <td>{{ $kamar->status }}</td>
                                     <td>
                                         <button type="button" class="btn btn-icon btn-outline-primary">
                                             <span class="tf-icons bx bx-edit-alt "></span>
