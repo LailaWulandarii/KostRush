@@ -13,39 +13,24 @@
                             <tr>
                                 <th>Nama</th>
                                 <th>No HP</th>
+                                <th>Kamar</th>
                                 <th>Status</th>
-                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
-                            @foreach ($penyewa as $user)
+                            @foreach ($penyewa as $data)
                                 <tr>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->no_hp }}</td>
-                                    <td>{{ $user->status }}</td>
-                                    <td>
-                                            <a href="{{ route('users.show', $user->id) }}"
-                                                class="btn btn-icon btn-outline-primary">
-                                                <span class="tf-icons bx bx-show"></span>
-                                            </a>
-                                        <a href="{{ route('users.edit', $user->id) }}"
-                                            class="btn btn-icon btn-outline-primary">
-                                            <span class="tf-icons bx bx-edit-alt"></span>
-                                        </a>
-                                        <a href="{{ url('users/' . $user->id . '/delete') }}"
-                                            onclick="return confirm('Apakah kamu yakin akan menghapus data ini?')"
-                                            class="btn btn-icon btn-outline-primary"><span
-                                                class="tf-icons bx bx-trash"></span></a>
-                                    </td>
+                                    <td>{{ $data->name }}</td>
+                                    <td>{{ $data->no_hp }}</td>
+                                    <td>{{ $data->kamar }}</td>
+                                    <td>{{ $data->status }}</td>
                                 </tr>
                             @endforeach
+
                         </tbody>
                     </table>
                 </div>
             </div>
-            <!--/ Hoverable Table rows -->
-            <!-- / Content -->
-
         </div>
 
     </div>
