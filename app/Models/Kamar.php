@@ -26,5 +26,8 @@ class Kamar extends Model
     {
         return $this->belongsTo(Kost::class, 'id_kost', 'id_kost');
     }
+    public function fotoKamar(){
+        return $this->hasMany(fotoKamar::class, 'id_kamar', 'id_kamar');
+    }
     
 }

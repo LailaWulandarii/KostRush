@@ -9,10 +9,8 @@ class Kost extends Model
 {
     use HasFactory;
 
-    protected $table = 'kost'; // Nama tabel yang sesuai
-
-    protected $primaryKey = 'id_kost'; // Kolom kunci primer
-
+    protected $table = 'kost'; 
+    protected $primaryKey = 'id_kost'; 
     protected $fillable = [
         'nama_kost',
         'fasilitas_kost',
