@@ -14,21 +14,21 @@ class KamarController extends Controller
     public function create()
     {
         // Tampilkan halaman formulir untuk menambahkan pengguna baru
-        return view('pages.create_kamar');
+        return view('pages.createKamar');
     }
     public function index()
     {
         // Mendapatkan ID pengguna yang sedang login
         $userId = Auth::id();
-        
+
         // Mengambil data kost milik pengguna yang sedang login
         $kost = Kost::where('id', $userId)->first();
-    
+
         // Jika pengguna memiliki kost
         if ($kost) {
             // Mengambil daftar kamar yang terkait dengan kost milik pengguna
             $kamars = $kost->kamars;
-            
+
             // Mengirim data kamar ke tampilan
             return view('pages.kamar', compact('kamars'));
         } else {
@@ -36,27 +36,43 @@ class KamarController extends Controller
             return redirect()->route('pages.home');
         }
     }
-    
-    public function store(Request $request)
+    public function edit($id)
     {
-        // Validasi data yang dikirimkan dari formulir
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6',
-            // tambahkan validasi untuk atribut lainnya seperti alamat, tanggal lahir, nomor HP, dll.
+        $kamar = Kamar::findOrFail($id);
+
+    }
+
+    public function update(Request $request, $id)
+    {
+        // Validasi input dari form
+        $validatedData = $request->validate([
+            'nama_kamar' => 'required|string|max:255',
+            'fasilitas_kamar' => 'nullable|string',
+            'harga_harian' => 'nullable|numeric',
+            'harga_bulanan' => 'nullable|numeric',
+            'status' => 'required|in:terisi,kosong',
         ]);
 
-        // Simpan data pengguna baru ke dalam tabel database
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        // tambahkan atribut lainnya seperti alamat, tanggal lahir, nomor HP, dll.
-        $user->save();
+        // Cari data kamar yang akan diupdate
+        $kamar = Kamar::findOrFail($id);
 
-        // Redirect pengguna setelah pengguna berhasil ditambahkan
-        return redirect()->route('data_pengguna')->with('success', 'Pengguna berhasil ditambahkan.');
+        // Update data kamar
+        $kamar->nama_kamar = $request->nama_kamar;
+        $kamar->fasilitas_kamar = $request->fasilitas_kamar;
+        $kamar->harga_harian = $request->harga_harian;
+        $kamar->harga_bulanan = $request->harga_bulanan;
+        $kamar->status = $request->status;
+        $kamar->save();
+
+        // Redirect ke halaman yang sesuai atau tampilkan pesan berhasil
+        return redirect()->route('pages.kamar')->with('success', 'Data kamar berhasil diupdate.');
     }
-    //
+
+    public function destroy(int $id)
+    {
+        $kamar = Kamar::findOrFail($id);
+        $kamar->delete();
+
+        return redirect()->back()->with('status', 'data berhasil dihapus');
+    }
 }

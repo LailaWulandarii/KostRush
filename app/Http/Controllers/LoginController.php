@@ -37,15 +37,15 @@ class LoginController extends Controller
         }
     }
 
-    public function email()
-    {
-        return view('auth.email');
-    }
 
     public function logout(Request $request)
     {
         $request->session()->forget('id_kost');
         Auth::logout();
         return redirect()->route('login')->with('success', 'Kamu berhasil logout');
+    }
+    public function email()
+    {
+        return view('auth.email');
     }
 }
