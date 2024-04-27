@@ -28,7 +28,7 @@ Route::get('/coba', function () {
 });
 
 Route::apiResource('apipenghuni', PenghuniController::class)->middleware('auth:api');
-Route::post('/apiregister', [AuthController::class, 'register']);// Route::resource('apipenghuni', 'API\PenghuniController');
+Route::post('/apiregister', [AuthController::class, 'register']);
 // Route::resource('loginAPI', HomeController::class);
 
 // Route untuk login pengguna
@@ -36,3 +36,4 @@ Route::post('/apilogin', [AuthController::class, 'login']);
 
 // Route untuk logout pengguna
 Route::post('/apilogout', [AuthController::class, 'logout'])->middleware('auth:api');
+Route::get('/apipenghuni', [AuthController::class, 'login']);
