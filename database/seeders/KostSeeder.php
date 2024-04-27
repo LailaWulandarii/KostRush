@@ -15,22 +15,16 @@ class KostSeeder extends Seeder
         // Data yang ingin Anda masukkan ke dalam tabel kost
         $data = [
             [
-                'nama_kost' => 'Kost A',
-                'fasilitas_kost' => 'Wi-Fi, Parkir Luas, Keamanan 24 Jam',
-                'peraturan_kost' => 'Tidak boleh membawa hewan peliharaan, Tidak merokok di dalam kamar',
-                'alamat' => 'Jalan Contoh No. 123',
-                'jenis_bank' => 'BCA',
-                'no_rek' => '1234567890',
-                'nama_rek' => 'Pemilik Kost A',
+                'nama_kost' => 'Kost Bapak Hakim',
+                'alamat' => 'Jl. Suka Maju No. 10',
+                'peraturan' => 'Dilarang membawa tamu menginap, tidak boleh bising setelah jam 10 malam, wajib menjaga kebersihan kost',
+                'fasilitas' => 'Kamar mandi dalam, AC, WiFi, Parkiran',
             ],
             [
-                'nama_kost' => 'Kost B',
-                'fasilitas_kost' => 'Dapur Bersama, Akses ke Transportasi Umum',
-                'peraturan_kost' => 'Tidak boleh membawa tamu lebih dari 2 orang, Membersihkan kamar secara berkala',
-                'alamat' => 'Jalan Contoh No. 456',
-                'jenis_bank' => 'BNI',
-                'no_rek' => '0987654321',
-                'nama_rek' => 'Pemilik Kost B',
+                'nama_kost' => 'Kost Melati',
+                'alamat' => 'Jl. Bunga Raya No. 5',
+                'peraturan' => 'Dilarang merokok di dalam kamar, wajib membuang sampah pada tempatnya, jam malam pukul 11 malam',
+                'fasilitas' => 'Kamar mandi luar, WiFi, Parkiran',
             ],
             // Tambahkan data lainnya sesuai kebutuhan
         ];

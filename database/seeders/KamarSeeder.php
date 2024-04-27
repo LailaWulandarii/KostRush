@@ -15,18 +15,16 @@ class KamarSeeder extends Seeder
         // Data yang ingin Anda masukkan ke dalam tabel kamar
         $data = [
             [
-                'id_kost' => 1,
-                'nama_kamar' => 'Kamar 1',
-                'fasilitas_kamar' => 'AC, Kamar Mandi Dalam',
-                'harga_bulanan' => 1500000,
-                'harga_harian' => 100000,
+                'nama_kamar' => 'Kamar A',
+                'harga' => 500000,
+                'fasilitas' => 'AC, WiFi',
+                'status_kamar' => 'kosong',
             ],
             [
-                'id_kost' => 1,
-                'nama_kamar' => 'Kamar 2',
-                'fasilitas_kamar' => 'AC, Kamar Mandi Luar',
-                'harga_bulanan' => 1200000,
-                'harga_harian' => 80000,
+                'nama_kamar' => 'Kamar C',
+                'harga' => 600000,
+                'fasilitas' => 'AC, TV, WiFi',
+                'status_kamar' => 'terisi',
             ],
             // Tambahkan data lainnya sesuai kebutuhan
         ];
