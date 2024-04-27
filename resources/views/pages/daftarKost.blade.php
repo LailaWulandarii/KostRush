@@ -59,26 +59,50 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="col-md-8 " >
+                        <div class="col-md-8">
                             <div class="card-body">
-                                <form method="POST" action="{{ route('kost.update', ['kost' => $kost->id]) }}">
-                                    @method('PUT')
+                                <form method="POST" action="{{ route('kost.store') }}">
                                     @csrf
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="basic-icon-default-company">Nama Kost</label>
-                                        <div class="col-sm-7">
+                                        <label class="col-sm-2 col-form-label" for="basic-icon-default-company">Nama
+                                            Kost</label>
+                                        <div class="col-sm-10">
                                             <div class="input-group">
                                                 <span class="input-group-text"><i class="bx bx-buildings"></i></span>
                                                 <input type="text" id="nama_kost" class="form-control" name="nama_kost"
-                                                    value="{{ old('nama_kost', $kost->nama_kost) }}" />
+                                                    value="{{ old('nama_kost') }}" />
                                             </div>
                                             @error('nama_kost')
                                                 <small>{{ $message }}</small>
                                             @enderror
                                         </div>
-                                        <div class="col-sm-3">
-                                            <input type="text" id="tipe" class="form-control" name="tipe" readonly
-                                                    value="{{ old('tipe', $kost->tipe) }}" />
+                                    </div>
+                                    <div class="col-md">
+                                        <label class="col-sm-2 col-form-label" for="basic-icon-default-company">Tipe Kost</label>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-check">
+                                                    <input name="tipe" class="form-check-input" type="radio"
+                                                        value="putra" id="statusPutra" 
+                                                        {{ old('tipe') === 'putra' ? 'checked' : '' }} />
+                                                    <label class="form-check-label" for="statusPutra">Putra</label>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-check">
+                                                    <input name="tipe" class="form-check-input" type="radio"
+                                                        value="putri" id="statusPutri" 
+                                                        {{ old('tipe') === 'putri' ? 'checked' : '' }} />
+                                                    <label class="form-check-label" for="statusPutri">Putri</label>
+                                                </div>
+                                            </div><div class="col">
+                                                <div class="form-check">
+                                                    <input name="tipe" class="form-check-input" type="radio"
+                                                        value="campur" id="statusCampur" 
+                                                        {{ old('tipe') === 'campur' ? 'checked' : '' }} />
+                                                    <label class="form-check-label" for="statusCampur">Campur</label>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -88,7 +112,7 @@
                                             <div class="input-group">
                                                 <span class="input-group-text"><i class="bx bx-building"></i></span>
                                                 <textarea class="form-control" type="text" id="fasilitas" name="fasilitas" rows="3"
-                                                    style="text-align: justify">{{ old('fasilitas', $kost->fasilitas) }}
+                                                    style="text-align: justify">{{ old('fasilitas') }}
                                                 </textarea>
                                             </div>
                                             @error('fasilitas')
@@ -103,7 +127,7 @@
                                             <div class="input-group">
                                                 <span class="input-group-text"><i class="bx bx-error-alt"></i></span>
                                                 <textarea class="form-control" type="text" id="peraturan" name="peraturan" rows="2"
-                                                    style="text-align: justify">{{ old('peraturan', $kost->peraturan) }}
+                                                    style="text-align: justify">{{ old('peraturan') }}
                                                 </textarea>
                                             </div>
                                             @error('peraturan')
@@ -118,7 +142,7 @@
                                             <div class="input-group">
                                                 <span class="input-group-text"><i class="bx bx-map"></i></span>
                                                 <textarea class="form-control" type="text" id="alamat" name="alamat" rows="2"
-                                                    style="text-align: justify">{{ old('alamat', $kost->alamat) }}</textarea>
+                                                    style="text-align: justify">{{ old('alamat') }}</textarea>
                                             </div>
                                         </div>
                                         @error('alamat')
