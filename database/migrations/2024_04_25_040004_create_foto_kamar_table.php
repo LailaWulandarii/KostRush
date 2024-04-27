@@ -9,18 +9,14 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('foto_kamar', function (Blueprint $table) {
-            $table->id('id_foto_kamar');
-            $table->unsignedBigInteger('id_kamar'); // Tambahkan kolom id_kost
-            $table->text('foto_kamar');
+            $table->bigIncrements('id_foto_kamar');
+            $table->bigInteger('id_kamar')->unsigned()->nullable();
+            $table->foreign('id_kamar')->references('id')->on('kamars')->onDelete('cascade');
+            $table->string('foto_kamar')->nullable();
             $table->timestamps();
-
-            $table->foreign('id_kamar')
-                ->references('id_kamar')
-                ->on('kamar')
-                ->onDelete('cascade');
         });
     }
 

@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('kost', function (Blueprint $table) {
-            $table->foreignId('id')->constrained('users')->onDelete('cascade');
+        Schema::table('kamars', function (Blueprint $table) {
+            $table->integer('jumlah_sewa')->default(0);
         });
     }
 
@@ -21,9 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('kost', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
-            $table->dropColumn('user_id');
+        Schema::table('kamars', function (Blueprint $table) {
+            //
         });
     }
 };

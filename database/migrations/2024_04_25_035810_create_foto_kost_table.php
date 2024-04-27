@@ -9,18 +9,14 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('foto_kost', function (Blueprint $table) {
-            $table->id('id_foto_kost');
-            $table->unsignedBigInteger('id_kost'); // Tambahkan kolom id_kost
-            $table->text('foto_kost');
+            $table->bigIncrements('id_foto_kost');
+            $table->bigInteger('id_kost')->unsigned()->nullable();
+            $table->foreign('id_kost')->references('id')->on('kosts')->onDelete('cascade');
+            $table->string('foto_kost')->nullable();
             $table->timestamps();
-
-            $table->foreign('id_kost')
-                ->references('id_kost')
-                ->on('kost')
-                ->onDelete('cascade');
         });
     }
 
@@ -29,6 +25,5 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('foto_kost');
     }
 };

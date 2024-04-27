@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('kamar', function (Blueprint $table) {
-            $table->enum('status', ['terisi', 'kosong'])->nullable();
+        Schema::table('kosts', function (Blueprint $table) {
+            $table->enum('tipe', ['putra', 'putri', 'campur'])->nullable();
         });
     }
 
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('kamar', function (Blueprint $table) {
+        Schema::table('kosts', function (Blueprint $table) {
             //
         });
     }

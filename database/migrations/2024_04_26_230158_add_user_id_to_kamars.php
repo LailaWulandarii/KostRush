@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('transaksi', function (Blueprint $table) {
-            $table->enum('status', ['belum_bayar', 'menunggu_verifikasi', 'diterima','ditolak'])->nullable();
-        });
+        Schema::table('kamars', function (Blueprint $table) {
+            $table->bigInteger('id_user')->unsigned()->nullable();
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+                    });
     }
 
     /**
@@ -21,7 +22,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('transaksi', function (Blueprint $table) {
+        Schema::table('kamars', function (Blueprint $table) {
             //
         });
     }
