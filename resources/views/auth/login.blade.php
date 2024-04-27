@@ -149,7 +149,7 @@
 
                         <p class="text-center">
                             <span>Belum punya akun?</span>
-                            <a href="{{ route('register') }}">
+                            <a href="{{ route('register_akun_form') }}">
                                 <span>Buat akun baru</span>
                             </a>
                         </p>

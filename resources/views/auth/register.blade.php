@@ -111,8 +111,8 @@
                         <h4 class="mb-2">Selamat Datang di KostRush! 👋</h4>
                         <p class="mb-4">Daftarkan dirimu terlebih dahulu!</p>
 
-                        <form id="formAuthentication" class="mb-3" action="{{ route('register_proses') }}"
-                            method="POST">
+                        <form id="formAuthentication" class="mb-3" action="{{ route('register_akun_process') }}"
+                            method="POST">  
                             @csrf
                             <div class="mb-3">
                                 <label for="name" class="form-label">Nama Lengkap</label>
