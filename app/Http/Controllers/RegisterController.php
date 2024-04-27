@@ -7,15 +7,16 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use App\Models\Kost;
 
 class RegisterController extends Controller
 {
-    public function index()
+    public function registerAkunForm()
     {
         return view('auth.register');
     }
 
-    public function register_proses(Request $request)
+    public function registerAkun(Request $request)
     {
         $message = [
             'required' => 'Data wajib diisi!',
@@ -30,24 +31,25 @@ class RegisterController extends Controller
             'name' => 'required|string|min:5|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => ['required', 'string', 'min:6', 'max:255', 'confirmed', 'regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/'],
-            'alamat' => 'required|string|min:15|max:255',
-            'tgl_lahir' => 'required|date',
-            'no_hp' => ['required', 'string', 'max:15', 'regex:/^(08|\+62)\d{9,13}$/'],
-            'jenis_kelamin' => 'required',
+            // 'alamat' => 'required|string|min:15|max:255',
+            // 'tgl_lahir' => 'required|date',
+            // 'no_hp' => ['required', 'string', 'max:15', 'regex:/^(08|\+62)\d{9,13}$/'],
+            // 'jenis_kelamin' => 'required',
         ], $message);
 
         if ($validator->fails()) {
-            return redirect()->route('register')->withErrors($validator)->withInput()->with('failed', 'Registrasi gagal. Silakan coba lagi.');
+            return redirect()->route('register_akun_form')->withErrors($validator)->withInput()->with('failed', 'Registrasi gagal. Silakan coba lagi.');
         }
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'alamat' => $request->alamat,
-            'tgl_lahir' => $request->tgl_lahir,
-            'no_hp' => $request->no_hp,
-            'jenis_kelamin' => $request->jenis_kelamin,
+            // 'alamat' => $request->alamat,
+            // 'tgl_lahir' => $request->tgl_lahir,
+            // 'no_hp' => $request->no_hp,
+            // 'jenis_kelamin' => $request->jenis_kelamin,
+            'role' => 'pemilik',
         ]);
 
         if ($user) {

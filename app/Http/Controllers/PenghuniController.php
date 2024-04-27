@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Kost;
+use App\Models\Kamar;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
 
@@ -14,58 +15,18 @@ class PenghuniController extends Controller
     // Method untuk menampilkan data penghuni dalam antarmuka pengguna web
     public function index()
     {
-        // Mendapatkan ID pengguna yang sedang login
-        $userId = Auth::id();
+        $user = Auth::user();
 
-        // Mengambil data kost yang terhubung dengan akun pengguna
-        $kost = Kost::where('id', $userId)->first();
+        // Mendapatkan data penghuni kost berdasarkan pengguna yang sedang login
+        $penghuni = User::where('role', 'penyewa')
+            ->where('id_kost', $user->id_kost)
+            ->with('penghuniKamar', 'transaksis') // Menggunakan relasi one-to-one untuk penghuni kamar
+            ->get();
 
-        // Jika pengguna memiliki kost
-        if ($kost) {
-            // Mengambil daftar kamar yang terkait dengan kost milik pengguna
-            $kamarIds = $kost->kamars()->pluck('id_kamar'); // Mengambil ID kamar yang terkait dengan kost
-
-            // Mengambil penghuni (penyewa) dari kamar-kamar tersebut
-            $penghuni = User::whereIn('id_kamar', $kamarIds)->get();
-
-            // Mengirim data penghuni ke tampilan
-            return view('pages.penghuni', compact('penghuni'));
-        } else {
-            // Jika pengguna tidak memiliki kost, mungkin menampilkan pesan atau mengarahkan ke halaman lain
-            return redirect()->route('pages.home');
-        }
+        // Kemudian Anda bisa melewatkan data penghuni ke view untuk ditampilkan
+        return view('pages.penghuni', compact('penghuni'));
     }
 
-    public function store(Request $request)
-    {
-        $message = [
-            'required' => 'Data wajib diisi!',
-            'min' => 'Data harus diisi minimal :min karakter!',
-            'max' => 'Data harus diisi maksimal :max karakter!',
-        ];
-        $request->validate([
-            'name' => 'required|string|min:5|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => ['required', 'string', 'min:6', 'max:255', 'regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/'],
-            'alamat' => 'required|string|min:15|max:255',
-            'tgl_lahir' => 'required|date',
-            'no_hp' => ['required', 'string', 'max:15', 'regex:/^(08|\+62)\d{9,13}$/'],
-            'jenis_kelamin' => 'required',
-        ], $message);
-
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->role = 'penyewa';
-        $user->alamat = $request->alamat;
-        $user->tgl_lahir = $request->tgl_lahir;
-        $user->no_hp = $request->no_hp;
-        $user->jenis_kelamin = $request->jenis_kelamin;
-        $user->save();
-
-        return view('pages.penghuni')->with('success', 'Pengguna berhasil ditambahkan.');
-    }
 
     public function update(Request $request, $id)
     {
@@ -76,31 +37,22 @@ class PenghuniController extends Controller
         ];
 
         $request->validate([
-            'name' => 'required|string|min:5|max:255',
-            'email' => 'required|email|unique:users,email,' . $id,
             'alamat' => 'required|string|min:15|max:255',
-            'tgl_lahir' => 'required|date',
             'no_hp' => ['required', 'string', 'max:15', 'regex:/^(08|\+62)\d{9,13}$/'],
-            'jenis_kelamin' => 'required',
+            'pekerjaan' => 'required|string|min:15|max:255',
         ], $message);
 
         $user = User::findOrFail($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
         $user->alamat = $request->alamat;
-        $user->tgl_lahir = $request->tgl_lahir;
         $user->no_hp = $request->no_hp;
-        $user->jenis_kelamin = $request->jenis_kelamin;
+        $user->pekerjaan = $request->pekerjaan;
         $user->save();
 
-        return view('pages.penghuni')->with('success', 'Pengguna berhasil diperbarui.');
-    }
+        $penghuni = User::where('role', 'penyewa')
+            ->where('id_kost', Auth::user()->id_kost) // Mengambil pengguna sesuai dengan ID kost pengguna yang sedang login
+            ->with(['kamar', 'transaksi'])
+            ->get();
 
-    public function destroy(int $id)
-    {
-        $user = User::findOrFail($id);
-        $user->delete();
-
-        return redirect()->back()->with('status', 'data berhasil dihapus');
+        return view('pages.penghuni', compact('penghuni'))->with('success', 'Pengguna berhasil diperbarui.');
     }
 }
