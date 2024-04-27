@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
-
+use App\Models\Kost;
+use App\Models\Transaksi;
 class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, Notifiable;
@@ -24,23 +26,47 @@ class User extends Authenticatable implements JWTSubject
         'password',
         'role',
         'alamat',
+        'pekerjaan',
         'tgl_lahir',
         'no_hp',
         'jenis_kelamin',
-        'created_at',
-        'updated_at',
-        'email_verified_at',
+        'foto_ktp',
+        'id_kost',
+        'id_kamar',
     ];
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+    public function penghuniKamar()
+    {
+        return $this->hasOne(Kamar::class, 'id_user'); 
+    }
+
+    public function kamar()
+    {
+        return $this->hasMany(Kamar::class, 'id_user');
+    }
+
+    public function transaksis()
+    {
+        return $this->hasMany(Transaksi::class, 'id');
+    }
+    public function kost()
+    {
+        return $this->belongsTo(Kost::class, 'id_kost');
+    }
+
+
+
 
     /**
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+
 
     /**
      * The attributes that should be cast.
@@ -73,8 +99,5 @@ class User extends Authenticatable implements JWTSubject
     }
 
     // Definisi relasi User ke Transaksi (satu user bisa memiliki banyak transaksi)
-    public function transaksis()
-    {
-        return $this->hasMany(Transaksi::class, 'id');
-    }
+
 }

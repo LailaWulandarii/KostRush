@@ -8,13 +8,31 @@ use Illuminate\Database\Eloquent\Model;
 class Transaksi extends Model
 {
     use HasFactory;
+    protected $table = 'transaksis';
 
-    protected $table = "transaksi";
-    protected $primaryKey = "id_transaksi";
-    protected $fillable = ['metode_bayar','tanggal_masuk','status','created_at','updated_at'];
+    protected $fillable = [
+        'id_kost',
+        'id_kamar',
+        'id',
+        'biaya',
+        'tanggal_masuk',
+        'tanggal_keluar',
+        'status_transaksi',
+    ];
+
+
+    public function kost()
+    {
+        return $this->belongsTo(Kost::class, 'id_kost');
+    }
+
+    public function kamar()
+    {
+        return $this->belongsTo(Kamar::class, 'id_kamar');
+    }
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'id');    }
-
+        return $this->belongsTo(User::class, 'id');
+    }
 }

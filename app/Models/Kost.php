@@ -4,25 +4,33 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Models\Kamar;
 
 class Kost extends Model
 {
     use HasFactory;
+    protected $table = 'kosts';
 
-    protected $table = 'kost'; 
-    protected $primaryKey = 'id_kost'; 
     protected $fillable = [
         'nama_kost',
-        'fasilitas_kost',
-        'peraturan_kost',
         'alamat',
-        'jenis_bank',
-        'no_rek',
-        'nama_rek',
+        'peraturan',
+        'fasilitas',
+        'id_user',
+        'tipe',
     ];
 
+    protected $hidden = [
+        // ...
+    ];
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user'); // Sesuaikan 'id_user' dengan nama kolom yang benar
+    }
     public function kamars()
     {
-        return $this->hasMany(Kamar::class, 'id_kost', 'id_kost');
+        return $this->hasMany(Kamar::class, 'id_kost');
     }
+    
 }
