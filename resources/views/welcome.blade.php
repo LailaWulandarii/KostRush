@@ -39,7 +39,7 @@
             class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
-            </div>
+            </div>x
         </div>
         <!-- Spinner End -->
 
@@ -114,7 +114,7 @@
                         <p class="mb-2">Unduh Kostrush sekarang dan temukan kost impianmu di Kabupaten Nganjuk!
                         </p>
                         <a href=""
-                            class="btn btn-unduh py-sm-2 px-3 px-sm-4 rounded-pill mt-3">Unduh</a>
+                            class="btn btn-unduh py-sm-2 px-3 px-sm-4 rounded-pill mt-3">Unduh Mobile App</a>
                     </div>
                     <div class="col-lg-6">
                         <img class="img-fluid wow fadeInUp" data-wow-delay="0.1s" style="margin-left: 180px; height: 500px"
@@ -136,35 +136,32 @@
                 <div class="row g-4">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="feature-item  rounded p-4">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4"
+                            {{-- <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4"
                                 style="width: 60px; height: 60px;">
                                 <i class="fa fa-eye text-white fs-4"></i>
-                            </div>
+                            </div> --}}
                             <h5 class="mb-3 title">Filter Lokasi</h5>
-                            <p class="m-0 text">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
-                                stet diam sed stet lorem.</p>
+                            <p class="m-0 text">Pencarian kost berdasarkan kecamatan di Kabupaten Nganjuk.</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                         <div class="feature-item  rounded p-4">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-secondary-gradient rounded-circle mb-4"
+                            {{-- <div class="d-inline-flex align-items-center justify-content-center bg-secondary-gradient rounded-circle mb-4"
                                 style="width: 60px; height: 60px;">
                                 <i class="fa fa-layer-group text-white fs-4"></i>
-                            </div>
+                            </div> --}}
                             <h5 class="mb-3 title">Filter Harga</h5>
-                            <p class="m-0 text">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
-                                stet diam sed stet lorem.</p>
+                            <p class="m-0 text">Pencarian kost berdasarkan harga termurah di Kabupaten Nganjuk.</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                         <div class="feature-item  rounded p-4">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-secondary-gradient rounded-circle mb-4"
+                            {{-- <div class="d-inline-flex align-items-center justify-content-center bg-secondary-gradient rounded-circle mb-4"
                                 style="width: 60px; height: 60px;">
                                 <i class="fa fa-layer-group text-white fs-4"></i>
-                            </div>
-                            <h5 class="mb-3 title">Filter Harga</h5>
-                            <p class="m-0 text">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
-                                stet diam sed stet lorem.</p>
+                            </div> --}}
+                            <h5 class="mb-3 title">Kontak Pemilik</h5>
+                            <p class="m-0 text">Kontak langsung dengan pemilik sehingga ada kemudahan komunikasi</p>
                         </div>
                     </div>
                 </div>
@@ -182,10 +179,10 @@
                 <div class="row g-4">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="feature-item rounded p-4">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4"
+                            {{-- <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4"
                                 style="width: 60px; height: 60px;">
                                 <i class="fa fa-eye text-white fs-4"></i>
-                            </div>
+                            </div> --}}
                             <h5 class="mb-3 title">Data Kost</h5>
                             <p class="m-0 text">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
                                 stet diam sed stet lorem.</p>
@@ -193,10 +190,10 @@
                     </div>
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                         <div class="feature-item rounded p-4">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-secondary-gradient rounded-circle mb-4"
+                            {{-- <div class="d-inline-flex align-items-center justify-content-center bg-secondary-gradient rounded-circle mb-4"
                                 style="width: 60px; height: 60px;">
                                 <i class="fa fa-layer-group text-white fs-4"></i>
-                            </div>
+                            </div> --}}
                             <h5 class="mb-3 title">Data Kamar</h5>
                             <p class="m-0 text">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
                                 stet diam sed stet lorem.</p>
@@ -204,10 +201,10 @@
                     </div>
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="feature-item rounded p-4">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4"
+                            {{-- <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4"
                                 style="width: 60px; height: 60px;">
                                 <i class="fa fa-eye text-white fs-4"></i>
-                            </div>
+                            </div> --}}
                             <h5 class="mb-3 title">Data Penghuni</h5>
                             <p class="m-0 text">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
                                 stet diam sed stet lorem.</p>
@@ -215,10 +212,10 @@
                     </div>
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="feature-item rounded p-4">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4"
+                            {{-- <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4"
                                 style="width: 60px; height: 60px;">
                                 <i class="fa fa-eye text-white fs-4"></i>
-                            </div>
+                            </div> --}}
                             <h5 class="mb-3 title">Data dan Riwayat Transaksi</h5>
                             <p class="m-0 text">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
                                 stet diam sed stet lorem.</p>
@@ -226,10 +223,10 @@
                     </div>
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="feature-item rounded p-4">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4"
+                            {{-- <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4"
                                 style="width: 60px; height: 60px;">
                                 <i class="fa fa-eye text-white fs-4"></i>
-                            </div>
+                            </div> --}}
                             <h5 class="mb-3 title">Notifikasi Pesanan Terbaru</h5>
                             <p class="m-0 text ">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
                                 stet diam sed stet lorem.</p>
@@ -237,10 +234,10 @@
                     </div>
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="feature-item rounded p-4">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4"
+                            {{-- <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4"
                                 style="width: 60px; height: 60px;">
                                 <i class="fa fa-eye text-white fs-4"></i>
-                            </div>
+                            </div> --}}
                             <h5 class="mb-3 title">Statistik dan Laporan</h5>
                             <p class="m-0 text">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
                                 stet diam sed stet lorem.</p>

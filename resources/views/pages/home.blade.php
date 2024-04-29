@@ -12,12 +12,13 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="card-title d-flex align-items-start justify-content-between">
-                                    <div class="avatar flex-shrink-0">
+                                    {{-- <div class="avatar flex-shrink-0">
                                         <img src="../assets/img/icons/unicons/cc-primary.png" alt="Credit Card"
                                             class="rounded" />
-                                    </div>
+                                    </div> --}}
                                 </div>
-                                <span class="fw-semibold d-block mb-1">Kamar Kosong</span>
+                                <span class="fw-semibold d-block mb-1" style="font-size: 1.5em">Kamar Kosong</span>
+                                <span class="fw-semibold d-block mb-1 h4" >{{ $jumlahKamarKosong }}</span>
                             </div>
                         </div>
                     </div>
@@ -25,12 +26,13 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="card-title d-flex align-items-start justify-content-between">
-                                    <div class="avatar flex-shrink-0">
+                                    {{-- <div class="avatar flex-shrink-0">
                                         <img src="../assets/img/icons/unicons/cc-primary.png" alt="Credit Card"
                                             class="rounded" />
-                                    </div>
+                                    </div> --}}
                                 </div>
-                                <span class="fw-semibold d-block mb-1">Penghuni aktif</span>
+                                <span class="fw-semibold d-block mb-1"  style="font-size: 1.5em">Penghuni aktif</span>
+                                <span class="fw-semibold d-block mb-1 h4" >0</span>
                             </div>
                         </div>
                     </div>
