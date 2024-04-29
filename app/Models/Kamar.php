@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Kost;
 use App\Models\User;
+use App\Models\Transaksi;
 
 class Kamar extends Model
 {
@@ -30,6 +31,11 @@ class Kamar extends Model
     {
         return $this->belongsTo(User::class, 'id_user'); // Sesuaikan dengan nama kunci asing yang sesuai
     }
+    public function transaksi()
+    {
+        return $this->hasMany(Transaksi::class, 'id_kamar');
+    }
+
     public function tampilkanKamarTertinggi()
     {
         $kamarTertinggi = Kamar::orderBy('jumlah_sewa', 'desc')->first();
