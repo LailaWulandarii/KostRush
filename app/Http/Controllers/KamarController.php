@@ -30,7 +30,6 @@ class KamarController extends Controller
 
     public function store(Request $request)
     {
-
         $message = [
             'required' => 'Data :attribute wajib diisi.',
             'min' => 'Data :attribute harus diisi minimal :min karakter.',
@@ -79,11 +78,6 @@ class KamarController extends Controller
         return redirect()->back()->with('success', 'Kamar berhasil ditambahkan.');
     }
 
-    public function edit($id)
-    {
-        $kamars = Kamar::findOrFail($id);
-    }
-
     public function update(Request $request, $id)
     {
         // Validasi input dari form
@@ -110,12 +104,8 @@ class KamarController extends Controller
 
     public function destroy(int $id)
     {
-        // Periksa apakah parameter $id sudah benar
-        // dd($id);
-
         $kamar = Kamar::findOrFail($id);
         $kamar->delete();
-
         return redirect()->back()->with('status', 'data berhasil dihapus');
     }
 }

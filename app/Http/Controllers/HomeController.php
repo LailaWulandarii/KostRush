@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kamar;
+use App\Models\User;
 use App\Models\Kost;
 
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\JsonResponse;
@@ -16,11 +16,23 @@ class HomeController extends Controller
     public function home()
     {
         $userEmail = session('user_email');
-        $user = Auth::user();
+        // Mendapatkan ID kost dari pengguna yang sedang login
+        $idKost = Auth::user()->id_kost;
 
-        return view('pages.home', compact('user'));
-    }
-    // public function index()
+        // Mengambil jumlah kamar kosong berdasarkan ID kost
+        $jumlahKamarKosong = Kamar::where('id_kost', $idKost)
+            ->where('status_kamar', 'kosong')
+            ->count();
+        $penyewas = User::where('role', 'penyewa')
+            ->where(function ($query) use ($idKost) {
+                $query->where('id_kost', $idKost)
+                    ->orWhereNull('id_kost');
+            })
+            ->count();
+
+        return view('pages.home', compact('penyewas', 'jumlahKamarKosong'));
+        // return view('pages.home', compact('user', 'jumlahKamarKosong', 'jumlahPenghuniAktif'));
+    }    // public function index()
     // {
     //     return "Selamat Routing Anda Sudah Benar";
     // }
