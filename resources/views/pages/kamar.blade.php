@@ -13,58 +13,6 @@
                         @foreach ($kamars as $kamar)
                             <div class="col-md-6 col-lg-4 mb-3">
                                 <div class="card h-100">
-                                    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-                                        <ol class="carousel-indicators">
-                                            <li data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></li>
-                                            <li data-bs-target="#carouselExample" data-bs-slide-to="1"></li>
-                                            <li data-bs-target="#carouselExample" data-bs-slide-to="2"></li>
-                                        </ol>
-                                        <div class="carousel-inner">
-                                            <div class="carousel-item active">
-                                                <img class="d-block w-100" src="{{ asset('/asset/img/elements/13.jpg') }}"
-                                                    alt="First slide" />
-                                                <div class="carousel-caption d-none d-md-block">
-                                                    <h3>First slide</h3>
-                                                    <p>Eos mutat malis maluisset et, agam ancillae quo te, in vim congue
-                                                        pertinacia.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="carousel-item">
-                                                <img class="d-block w-100" src="{{ asset('/asset/img/elements/2.jpg') }}"
-                                                    alt="Second slide" />
-                                                <div class="carousel-caption d-none d-md-block">
-                                                    <h3>Second slide</h3>
-                                                    <p>In numquam omittam sea.</p>
-                                                </div>
-                                            </div>
-                                            <div class="carousel-item">
-                                                <img class="d-block w-100" src="{{ asset('/asset/img/elements/18.jpg') }}"
-                                                    alt="Third slide" />
-                                                <div class="carousel-caption d-none d-md-block">
-                                                    <h3>Third slide</h3>
-                                                    <p>Lorem ipsum dolor sit amet, virtute consequat ea qui, minim graeco
-                                                        mel
-                                                        no.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <a class="carousel-control-prev" href="#carouselExample" role="button"
-                                            data-bs-slide="prev">
-                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Previous</span>
-                                        </a>
-                                        <a class="carousel-control-next" href="#carouselExample" role="button"
-                                            data-bs-slide="next">
-                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Next</span>
-                                        </a>
-                                    </div>
-                                    <!-- Menambahkan perulangan foreach untuk foto-foto kamar -->
-                                    {{-- @foreach ($kamar->fotoKamar as $foto)
-                                    <img class="card-img-top" src="{{ $foto->url }}" alt="Card image cap" />
-                                @endforeach --}}
                                     <div class="card-body">
                                         <div class="card-body d-flex justify-content-between align-items-center">
                                             <h5 class="card-title">{{ $kamar->nama_kamar }}</h5>
@@ -95,10 +43,50 @@
                         @endforeach
                     </div>
                 @else
-                    Tidak ada data kamar yang tersedia saat ini.
+                    <div class="mt-3 d-flex justify-content-center align-items-center flex-column">
+                        <div class="d-flex flex-column align-items-center">
+                            <img src="{{ asset('/asset/img/error.png') }}" alt="page-misc-error-light" width="400"
+                                class="img-fluid mb-2" data-app-dark-img="illustrations/page-misc-error-dark.png"
+                                data-app-light-img="illustrations/page-misc-error-light.png" />
+                            <h5 class="mt-2">Oops! data kamarmu tidak ditemukan, harap tambahkan kamar terlebih dahulu.
+                            </h5>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#createKamar"
+                                class="btn btn-primary mb-2">Tambah kamar</a>
+                        </div>
+                    </div>
             @endif
         </div>
     </div>
     @include('layouts.modalCreateKamar')
     @include('layouts.modalKamar')
 @endsection
+<script>
+    function previewImages(event) {
+        var previewContainer = document.getElementById('image-preview');
+        previewContainer.innerHTML = '';
+
+        var files = event.target.files;
+
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                var image = document.createElement('img');
+                image.src = e.target.result;
+                image.style.maxWidth = '100%';
+                image.style.height = 'auto';
+                image.style.marginRight = '10px';
+
+                previewContainer.appendChild(image);
+            }
+
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function clearPreview() {
+        var previewContainer = document.getElementById('image-preview');
+        previewContainer.innerHTML = ''; // Menghapus semua elemen di dalamnya
+    }
+</script>

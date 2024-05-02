@@ -87,20 +87,32 @@ class TransaksiController extends Controller
             ->where('id_transaksi', $id_transaksi)
             ->update(['status_transaksi' => 'selesai']);
 
-        // Ambil ID user dari data transaksi
-        $id_user = DB::table('transaksis')
-            ->where('id_transaksi', $id_transaksi)
-            ->value('id');
+        // Ambil ID user dan ID kamar dari data transaksi
+        $transaksi = DB::table('transaksis')->where('id_transaksi', $id_transaksi)->first();
+        $id_user = $transaksi->id;
+        $id_kamar = $transaksi->id_kamar;
+
         // Update status kamar menjadi "terisi" dan id_user
-        $id_kamar = DB::table('transaksis')
-            ->where('id_transaksi', $id_transaksi)
-            ->value('id_kamar');
         DB::table('kamars')
             ->where('id', $id_kamar)
             ->update([
                 'status_kamar' => 'terisi',
                 'id_user' => $id_user,
                 'jumlah_sewa' => DB::raw('jumlah_sewa + 1')
+            ]);
+
+        // Ambil id_kost dari tabel kosts
+        $id_kost = DB::table('kamars')
+            ->join('kosts', 'kamars.id_kost', '=', 'kosts.id')
+            ->where('kamars.id', $id_kamar)
+            ->value('kosts.id');
+
+        // Update id_kost dan id_kamar di tabel users
+        DB::table('users')
+            ->where('id', $id_user)
+            ->update([
+                'id_kost' => $id_kost,
+                'id_kamar' => $id_kamar
             ]);
 
         // Redirect atau kembali ke halaman yang sesuai

@@ -19,6 +19,7 @@ class Kost extends Model
         'fasilitas',
         'id_user',
         'tipe',
+        'kecamatan',
     ];
 
     protected $hidden = [

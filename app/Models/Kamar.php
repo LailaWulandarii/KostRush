@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Kost;
 use App\Models\User;
 use App\Models\Transaksi;
+use App\Models\foto_kamar;
 
 class Kamar extends Model
 {
@@ -35,7 +36,11 @@ class Kamar extends Model
     {
         return $this->hasMany(Transaksi::class, 'id_kamar');
     }
-
+    // Model Kamar
+    public function fotoKamar()
+    {
+        return $this->hasMany(foto_kamar::class, 'id_kamar');
+    }
     public function tampilkanKamarTertinggi()
     {
         $kamarTertinggi = Kamar::orderBy('jumlah_sewa', 'desc')->first();

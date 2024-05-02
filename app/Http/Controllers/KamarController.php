@@ -2,33 +2,137 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\foto_kamar;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth; // Tambahkan impor untuk Auth
 use App\Models\Kamar; // Tambahkan impor untuk model Kost
-use App\Models\fotoKamar; // Tambahkan impor untuk model Kost
 use App\Models\Kost; // Tambahkan impor untuk model Kost
 use Illuminate\Support\Facades\Hash;
+use App\Models\FotoKamar;
+use Illuminate\Support\Facades\DB;
 
 class KamarController extends Controller
 {
-
     public function index()
     {
         $user = Auth::user();
-
-        // Mendapatkan data kost yang terkait dengan pengguna yang sedang login
+    
+        // Get the associated kost for the logged-in user
         $kost = $user->kost;
-
-        // Ambil data kamar yang terkait dengan kost tersebut
+    
+        // Get the rooms associated with the kost
         $kamars = $kost->kamars;
-
-        // Mengirimkan data ke view, termasuk jika data kamar kosong
-        return view('pages.kamar')->with('kamars', $kamars);
+    
+        // Initialize an array to store photo paths for each room
+        $fotoKamar = [];
+    
+        // Iterate through each room and retrieve its associated photos
+        foreach ($kamars as $kamar) {
+            // Retrieve photos associated with the current room
+            $photos = $kamar->fotoKamar()->get();
+    
+            // Initialize an array to store photo paths for the current room
+            $photoPaths = [];
+    
+            // Iterate through each photo and add its path to the array
+            foreach ($photos as $photo) {
+                // Add the photo path to the array
+                $photoPaths[] = asset($photo->path);
+            }
+    
+            // Store the array of photo paths in the $fotoKamar array
+            $fotoKamar[$kamar->id] = $photoPaths;
+        }
+    
+        // Pass the data to the view
+        return view('pages.kamar', compact('kamars', 'fotoKamar'));
     }
+    
 
+    // public function tambahDataKamar(Request $request)
+    // {
+    //     // Validasi data dari form
+    //     $validatedData = $request->validate([
+    //         'nama_kamar' => 'required|string',
+    //         'foto.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048' // Validasi foto (maksimal 2MB)
+    //     ]);
+
+    //     // Inisialisasi variabel id_kamar
+    //     $id_kamar = null;
+
+    //     // Transaksi Database
+    //     DB::transaction(function () use ($validatedData, $request, &$id_kamar) {
+    //         // Simpan data kamar
+    //         $id_kamar = DB::table('kamars')->insertGetId([
+    //             'nama_kamar' => $validatedData['nama_kamar'],
+    //         ]);
+
+    //         // Simpan foto-foto kamar
+    //         foreach ($request->file('foto') as $foto) {
+    //             $path = $foto->store('public/foto_kamar'); // Simpan foto ke dalam direktori public/foto_kamar
+    //             DB::table('foto_kamar')->insert([
+    //                 'id_kamar' => $id_kamar,
+    //                 'foto_kamar' => $path // Ubah 'path' menjadi 'foto_kamar'
+    //             ]);
+    //         }
+    //     });
+
+    //     // Ambil semua foto kamar setelah proses penyimpanan
+    //     $fotoKamar = DB::table('foto_kamar')->where('id_kamar', $id_kamar)->get();
+
+    //     return view('pages.kosong', compact('fotoKamar'))->with('success', 'Data kamar berhasil disimpan');
+    // }
 
     public function store(Request $request)
+    {
+        $messages = [
+            'required' => 'Data :attribute wajib diisi.',
+            'min' => 'Data :attribute harus diisi minimal :min karakter.',
+            'max' => 'Data :attribute harus diisi maksimal :max karakter.',
+            'nama_kamar.regex' => 'Data :attribute hanya boleh berisi huruf, angka, dan spasi.',
+            'fasilitas.regex' => 'Data :attribute hanya boleh berisi huruf, angka, spasi, titik, koma, dan tanda kurung.',
+            'harga.numeric' => 'Data :attribute harus berupa angka.',
+            'status_kamar.in' => 'Data :attribute harus berisi "kosong" atau "terisi".',
+            'foto.*.image' => 'Data :attribute harus berupa file gambar.',
+            'foto.*.mimes' => 'Data :attribute harus berupa file dengan format: jpeg, png, jpg, gif.',
+            'foto.*.max' => 'Data :attribute harus kurang dari :max kilobita.',
+        ];
+
+        $request->validate([
+            'nama_kamar' => 'required|string|min:5|max:20|regex:/^[a-zA-Z0-9\s\']+$/',
+            'status_kamar' => 'required|in:kosong,terisi',
+            'fasilitas' => 'required|string|min:5|max:70|regex:/^[a-zA-Z0-9\s\':.,\/!]+$/',
+            'harga' => 'required|numeric|min:0',
+            'foto.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048' // Validasi foto (maksimal 2MB)
+        ], $messages);
+
+        // Memulai transaksi database
+        DB::transaction(function () use ($request, &$id_kamar) {
+            // Simpan data kamar
+            $user = Auth::user();
+            $kamar = new Kamar();
+            $kamar->nama_kamar = $request['nama_kamar'];
+            $kamar->status_kamar = $request['status_kamar'];
+            $kamar->fasilitas = $request['fasilitas'];
+            $kamar->harga = $request['harga'];
+            $kamar->id_kost = $user->kost->id;
+            $kamar->save();
+
+            // Simpan foto-foto kamar
+            foreach ($request->file('foto') as $foto) {
+                $path = $foto->store('public/foto_kamar'); // Simpan foto ke dalam direktori public/foto_kamar
+                DB::table('foto_kamar')->insert([
+                    'id_kamar' => $kamar->id, // Menggunakan ID kamar yang baru saja disimpan
+                    'foto_kamar' => $path
+                ]);
+            }
+        });
+
+        return redirect()->back()->with('success', 'Kamar berhasil ditambahkan.');
+    }
+
+    public function update(Request $request, $id)
     {
         $message = [
             'required' => 'Data :attribute wajib diisi.',
@@ -43,50 +147,11 @@ class KamarController extends Controller
             'foto_kamar.max' => 'Ukuran file :attribute tidak boleh melebihi 2 MB.',
         ];
         $request->validate([
-            'nama_kamar' => 'required|string|max:255',
+            'nama_kamar' => 'required|string|min:5|max:20|regex:/^[a-zA-Z0-9\s\']+$/',
             'status_kamar' => 'required|in:kosong,terisi',
-            'fasilitas' => 'required|string',
+            'fasilitas' => 'required|string|min:5|max:70|regex:/^[a-zA-Z0-9\s\':.,\/!]+$/',
             'harga' => 'required|numeric|min:0',
         ], $message);
-
-        // Mendapatkan pengguna yang sedang login
-        $user = Auth::user();
-
-        // Membuat data kamar baru berdasarkan data yang diterima dari formulir
-        $kamar = new Kamar();
-        $kamar->nama_kamar = $request['nama_kamar'];
-        $kamar->status_kamar = $request['status_kamar'];
-        $kamar->fasilitas = $request['fasilitas'];
-        $kamar->harga = $request['harga'];
-        $kamar->id_kost = $user->kost->id; // Menggunakan ID kost dari pengguna yang sedang login
-        $kamar->save();
-
-        // if ($request->has('foto_kamar')) {
-        //     foreach ($request->file('foto_kamar') as $file) {
-        //         $fileName = time() . '_' . $file->getClientOriginalName();
-        //         $path = 'fotoKamar/kamar';
-        //         $file->move($path, $fileName);
-
-        //         $fotoKamar = new fotoKamar();
-        //         $fotoKamar->id_kamar = $kamar->id_kamar;
-        //         $fotoKamar->foto_kamar = $fileName;
-        //         $fotoKamar->save();
-        //     }
-        // }
-
-        // Redirect kembali ke halaman yang sesuai setelah berhasil menambahkan kamar
-        return redirect()->back()->with('success', 'Kamar berhasil ditambahkan.');
-    }
-
-    public function update(Request $request, $id)
-    {
-        // Validasi input dari form
-        $validatedData = $request->validate([
-            'nama_kamar' => 'required|string|max:255',
-            'fasilitas' => 'nullable|string',
-            'harga' => 'nullable|numeric',
-            'status_kamar' => 'required|in:terisi,kosong',
-        ]);
 
         // Cari data kamar yang akan diupdate
         $kamar = Kamar::findOrFail($id);

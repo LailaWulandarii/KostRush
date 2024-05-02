@@ -55,7 +55,8 @@
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                 <div class="app-brand demo" style="height: 110px">
                     <a href="index.html" class="app-brand-link">
-                        <img style="height: 120px; margin-left: -20px;" src="{{ asset('/asset/img/logo.jpeg') }}" alt="KostRush">
+                        <img style="height: 120px; margin-left: -20px;" src="{{ asset('/asset/img/logo.jpeg') }}"
+                            alt="KostRush">
                     </a>
                     <a href="javascript:void(0);"
                         class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -96,10 +97,50 @@
                     <li class="menu-item {{ Request::Is('transaksi/*') || Request::is('transaksi') ? 'active' : '' }}">
                         <a href="{{ url('transaksi') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-calculator"></i>
-                            <div data-i18n="Analytics">Transaksi</div>
+                            <div data-i18n="Analytics">Transaksi Baru</div>
                         </a>
                     </li>
-                    <li class="menu-item {{ Request::Is('riwayat-transaksi/*') || Request::is('riwayat-transaksi') ? 'active' : '' }}">
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-layout"></i>
+                            <div data-i18n="Layouts">Transaksi</div>
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="layouts-without-menu.html" class="menu-link">
+                                    <div data-i18n="Without menu">Without menu</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="layouts-without-navbar.html" class="menu-link">
+                                    <div data-i18n="Without navbar">Without navbar</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="layouts-container.html" class="menu-link">
+                                    <div data-i18n="Container">Container</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="layouts-fluid.html" class="menu-link">
+                                    <div data-i18n="Fluid">Fluid</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="layouts-blank.html" class="menu-link">
+                                    <div data-i18n="Blank">Blank</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    {{-- <li class="menu-item {{ Request::Is('transaksi/*') || Request::is('transaksi') ? 'active' : '' }}">
+                        <a href="{{ url('transaksi') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-calculator"></i>
+                            <div data-i18n="Analytics">Transaksi Diproses</div>
+                        </a>
+                    </li> --}}
+                    <li
+                        class="menu-item {{ Request::Is('riwayat-transaksi/*') || Request::is('riwayat-transaksi') ? 'active' : '' }}">
                         <a href="{{ url('riwayat-transaksi') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-history"></i>
                             <div data-i18n="Analytics">Riwayat Transaksi</div>
@@ -122,25 +163,14 @@
                     </div>
 
                     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-                        <!-- Search -->
-                        <div class="navbar-nav align-items-center">
-                            <div class="nav-item d-flex align-items-center">
-                                <i class="bx bx-search fs-4 lh-0"></i>
-                                <input type="text" class="form-control border-0 shadow-none"
-                                    placeholder="Search..." aria-label="Search..." />
-                            </div>
-                        </div>
-                        <!-- /Search -->
 
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
-                            <!-- Place this tag where you want the button to render. -->
-
                             <!-- User -->
                             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
-                                    <div class="avatar avatar-online">
-                                        <img src="../assets/img/avatars/1.png" alt
+                                    <div class="avatar">
+                                        <img src="{{ asset('/asset/img/avatars/ava.jpg') }}" alt
                                             class="w-px-40 h-auto rounded-circle" />
                                     </div>
                                 </a>
@@ -149,8 +179,8 @@
                                         <a class="dropdown-item" href="#">
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
-                                                    <div class="avatar avatar-online">
-                                                        <img src="../assets/img/avatars/1.png" alt
+                                                    <div class="avatar">
+                                                        <img src="{{ asset('/asset/img/avatars/ava.jpg') }}" alt
                                                             class="w-px-40 h-auto rounded-circle" />
                                                     </div>
                                                 </div>
