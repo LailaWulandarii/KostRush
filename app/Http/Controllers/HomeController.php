@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kamar;
 use App\Models\User;
-use App\Models\Kost;
+use App\Models\Transaksi;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,19 +18,20 @@ class HomeController extends Controller
         $userEmail = session('user_email');
         // Mendapatkan ID kost dari pengguna yang sedang login
         $idKost = Auth::user()->id_kost;
-
-        // Mengambil jumlah kamar kosong berdasarkan ID kost
+        $kamars = Kamar::where('id_kost', $idKost)
+            ->get();        // Mengambil jumlah kamar kosong berdasarkan ID kost
         $jumlahKamarKosong = Kamar::where('id_kost', $idKost)
             ->where('status_kamar', 'kosong')
             ->count();
         $penyewas = User::where('role', 'penyewa')
-            ->where(function ($query) use ($idKost) {
-                $query->where('id_kost', $idKost)
-                    ->orWhereNull('id_kost');
-            })
+            ->where('id_kost', $idKost)
+            ->get()
             ->count();
+        $transaksis = Transaksi::where('status_transaksi', 'menunggu')
+            ->with('user', 'kamar')
+            ->get();
 
-        return view('pages.home', compact('penyewas', 'jumlahKamarKosong'));
+        return view('pages.home', compact('penyewas', 'jumlahKamarKosong', 'transaksis', 'kamars'));
         // return view('pages.home', compact('user', 'jumlahKamarKosong', 'jumlahPenghuniAktif'));
     }    // public function index()
     // {
