@@ -44,9 +44,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <form
-                                        action="{{ $t->status_transaksi === 'menunggu' ? route('proses.transaksi', $t->id_transaksi) : route('verifikasi.transaksi', $t->id_transaksi) }}"
-                                        method="POST">
+                                    <form action="{{ route('proses.transaksi', $t->id_transaksi) }}" method="POST">
                                         @csrf
                                         @method('PUT')
                                         <div class="modal-body">
@@ -129,7 +127,8 @@
                                         <div class="row mb-4">
                                             <div class="col-sm-12 text-center">
                                                 <button type="submit" class="btn btn-primary">
-                                                    {{ $t->status_transaksi === 'menunggu' ? 'Proses Transaksi' : 'Verifikasi Transaksi' }}
+                                                    Proses Transaksi
+                                                    <!-- Ubah teks tombol sesuai kebutuhan untuk transaksi baru -->
                                                 </button>
                                             </div>
                                         </div>

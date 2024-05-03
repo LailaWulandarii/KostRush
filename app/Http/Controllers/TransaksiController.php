@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\DB;
 
 class TransaksiController extends Controller
 {
-
     public function index()
     {
         $user = Auth::user();
@@ -34,12 +33,40 @@ class TransaksiController extends Controller
                 'kamars.nama_kamar'
             )
             ->where('transaksis.id_kost', $user->id_kost)
-            ->whereIn('transaksis.status_transaksi', ['menunggu', 'diproses'])
+            ->where('transaksis.status_transaksi', 'menunggu')
             ->get();
 
-        return view('pages.transaksi', compact('transaksis'));
+        return view('pages.transaksiBaru', compact('transaksis'));
     }
-    // Metode untuk memproses transaksi
+
+    public function indexProses()
+    {
+        $user = Auth::user();
+        $transaksis = DB::table('transaksis')
+            ->join('users', 'transaksis.id', '=', 'users.id')
+            ->join('kamars', 'transaksis.id_kamar', '=', 'kamars.id')
+            ->select(
+                'transaksis.*',
+                'users.name as nama_penyewa',
+                'users.email',
+                'users.no_hp',
+                'users.jenis_kelamin',
+                'users.alamat',
+                'users.pekerjaan',
+                'users.foto_ktp',
+                'users.tgl_lahir',
+                'transaksis.tanggal_masuk',
+                'transaksis.tanggal_keluar',
+                'transaksis.biaya',
+                'kamars.nama_kamar'
+            )
+            ->where('transaksis.id_kost', $user->id_kost)
+            ->where('transaksis.status_transaksi', 'diproses')
+            ->get();
+
+        return view('pages.transaksiProses', compact('transaksis'));
+    }
+
     public function prosesTransaksi($id_transaksi)
     {
         // Ambil status kamar

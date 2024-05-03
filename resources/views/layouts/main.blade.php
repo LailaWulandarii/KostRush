@@ -24,7 +24,6 @@
 
     <!-- Icons. Uncomment required icon fonts -->
     <link href="{{ asset('/asset/vendor/fonts/boxicons.css') }}" rel="stylesheet">
-
     <!-- Core CSS -->
     <link href="{{ asset('/asset/vendor/css/core.css') }}" rel="stylesheet" class="template-customizer-core-css" />
     <link href="{{ asset('/asset/vendor/css/theme-default.css') }}" rel="stylesheet"
@@ -34,7 +33,7 @@
 
     <!-- Vendors CSS -->
     <link href="{{ asset('/asset/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" rel="stylesheet">
-    <link href="{{ asset('/asset/vendor/libs/apex-charts/apex-charts.css') }}" rel="stylesheet">
+    <link href="{{ asset('/assets/vendor/libs/apex-charts/apex-charts.css') }}" rel="stylesheet">
 
     <!-- Page CSS -->
 
@@ -94,57 +93,28 @@
                             <div data-i18n="Analytics">Data Penghuni</div>
                         </a>
                     </li>
-                    <li class="menu-item {{ Request::Is('transaksi/*') || Request::is('transaksi') ? 'active' : '' }}">
-                        <a href="{{ url('transaksi') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-calculator"></i>
-                            <div data-i18n="Analytics">Transaksi Baru</div>
-                        </a>
-                    </li>
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-layout"></i>
+                            <i class="menu-icon tf-icons bx bx-calculator"></i>
                             <div data-i18n="Layouts">Transaksi</div>
                         </a>
                         <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="layouts-without-menu.html" class="menu-link">
-                                    <div data-i18n="Without menu">Without menu</div>
+                            <li class="menu-item" :class="{ 'active': isActive('/transaksi-baru') }">
+                                <a href="{{ url('transaksi-baru') }}" class="menu-link">
+                                    <div data-i18n="Transaksi Baru">Transaksi Baru</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
-                                <a href="layouts-without-navbar.html" class="menu-link">
-                                    <div data-i18n="Without navbar">Without navbar</div>
+                            <li class="menu-item" :class="{ 'active': isActive('/transaksi-proses') }">
+                                <a href="{{ url('transaksi-proses') }}" class="menu-link">
+                                    <div data-i18n="Transaksi Diproses">Transaksi Diproses</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
-                                <a href="layouts-container.html" class="menu-link">
-                                    <div data-i18n="Container">Container</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="layouts-fluid.html" class="menu-link">
-                                    <div data-i18n="Fluid">Fluid</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="layouts-blank.html" class="menu-link">
-                                    <div data-i18n="Blank">Blank</div>
+                            <li class="menu-item" :class="{ 'active': isActive('/riwayat-transaksi') }">
+                                <a href="{{ url('riwayat-transaksi') }}" class="menu-link">
+                                    <div data-i18n="Riwayat Transaksi">Riwayat Transaksi</div>
                                 </a>
                             </li>
                         </ul>
-                    </li>
-                    {{-- <li class="menu-item {{ Request::Is('transaksi/*') || Request::is('transaksi') ? 'active' : '' }}">
-                        <a href="{{ url('transaksi') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-calculator"></i>
-                            <div data-i18n="Analytics">Transaksi Diproses</div>
-                        </a>
-                    </li> --}}
-                    <li
-                        class="menu-item {{ Request::Is('riwayat-transaksi/*') || Request::is('riwayat-transaksi') ? 'active' : '' }}">
-                        <a href="{{ url('riwayat-transaksi') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-history"></i>
-                            <div data-i18n="Analytics">Riwayat Transaksi</div>
-                        </a>
                     </li>
                 </ul>
             </aside>
@@ -276,6 +246,13 @@
 
     <script src="{{ asset('/asset/js/dashboards-analytics.js') }}"></script>
 
+    <script>
+        methods: {
+            isActive(url) {
+                return window.location.pathname === url;
+            }
+        }
+    </script>
 </body>
 
 </html>
