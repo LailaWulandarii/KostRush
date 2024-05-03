@@ -22,7 +22,8 @@
                                                 <a class="badge bg-label-success">Kosong</a>
                                             @endif
                                         </div>
-                                        <div class="d-flex " style="display: flex; justify-content: space-around; ">
+                                        <div class="d-flex "
+                                            style="display: flex; justify-content: space-around; ">
                                             <button type="button"
                                                 class="btn btn-icon btn-outline-primary tf-icons bx bx-show mx-1"
                                                 data-bs-toggle="modal" style="width: 42px"

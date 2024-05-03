@@ -92,20 +92,12 @@
                             </div>
                         </div>
                         <br>
-                        <h2>Foto-foto Kamar</h2>
-                        <div class="row">
-                            @foreach ($fotoKamar as $fotos)
-                                @foreach ($fotos as $foto)
-                                    <div class="col-md-3 mb-3">
-                                        <img src="{{ $foto->path }}" class="img-fluid" alt="Foto Kamar">
-                                    </div>
-                                @endforeach
-                                {{-- If there are no photos for the current kamar, display a message --}}
-                                @if ($fotos->isEmpty())
-                                    <div class="col-md-12">
-                                        <p>Tidak ada foto untuk kamar ini.</p>
-                                    </div>
-                                @endif
+                        {{-- // Menampilkan gambar-gambar tersebut dalam halaman web --}}
+                        <div>
+                            @foreach ($kamars as $kamar)
+                                <!-- Tampilkan gambar kamar -->
+                                <img src="                                {{ asset('storage/foto_kamar/'. $kamar->id_kamar) }} 
+                                " alt="Foto Kamar {{ $kamar->nama_kamar }}">
                             @endforeach
                         </div>
                     </form>
