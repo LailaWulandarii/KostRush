@@ -11,44 +11,39 @@ use App\Models\Kost; // Tambahkan impor untuk model Kost
 use Illuminate\Support\Facades\Hash;
 use App\Models\FotoKamar;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class KamarController extends Controller
 {
+
+
     public function index()
     {
+
         $user = Auth::user();
-    
+
         // Get the associated kost for the logged-in user
         $kost = $user->kost;
-    
+
         // Get the rooms associated with the kost
         $kamars = $kost->kamars;
-    
-        // Initialize an array to store photo paths for each room
+
+        // Mencari foto kamar berdasarkan ID kamar
         $fotoKamar = [];
-    
-        // Iterate through each room and retrieve its associated photos
+
         foreach ($kamars as $kamar) {
-            // Retrieve photos associated with the current room
-            $photos = $kamar->fotoKamar()->get();
-    
-            // Initialize an array to store photo paths for the current room
-            $photoPaths = [];
-    
-            // Iterate through each photo and add its path to the array
-            foreach ($photos as $photo) {
-                // Add the photo path to the array
-                $photoPaths[] = asset($photo->path);
-            }
-    
-            // Store the array of photo paths in the $fotoKamar array
-            $fotoKamar[$kamar->id] = $photoPaths;
+            // Menggunakan Query Builder untuk mendapatkan ID kamar
+            $kamarId = DB::table('kamars')->where('id', $kamar->id)->value('id');
+
+            // Membangun URL ke gambar
+            $fotoUrl = url("storage/foto_kamar/{$kamarId}.jpg");
+
+            // Simpan URL ke dalam array
+            $fotoKamar[$kamar->id_kamar] = $fotoUrl;
         }
-    
-        // Pass the data to the view
+
         return view('pages.kamar', compact('kamars', 'fotoKamar'));
     }
-    
 
     // public function tambahDataKamar(Request $request)
     // {
