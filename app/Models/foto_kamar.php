@@ -13,6 +13,8 @@ class foto_kamar extends Model
     protected $fillable = [
         'id_kamar',
         'foto_kamar',
+        'created_at',
+        'updated_at',
     ];
 
     protected $hidden = [

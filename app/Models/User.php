@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Models;
-
-use illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
@@ -34,6 +33,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'foto_ktp',
         'id_kost',
         'id_kamar',
+        'verification_token',
     ];
 
     protected $hidden = [
