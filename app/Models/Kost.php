@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Kamar;
-use App\Models\foto_kost;
 
 class Kost extends Model
 {
@@ -33,9 +32,5 @@ class Kost extends Model
     public function kamars()
     {
         return $this->hasMany(Kamar::class, 'id_kost');
-    }
-    public function fotoKost()
-    {
-        return $this->hasMany(foto_kost::class, 'id_kost');
     }
 }
