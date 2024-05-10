@@ -41,9 +41,9 @@ class AuthController extends Controller
     {
         // Validate request data
         $validator = Validator::make($request->all(), [
-            'name' => ['required','string','min:5','max:30','regex:/^[a-zA-Z\s\']+$/'],
-            'email' => ['required','email','unique:users,email'],
-            'password' => ['required', 'string', 'min:6', 'max:12', 'confirmed'], // Password confirmation rule
+            'name' => ['required', 'string', 'min:5', 'max:30', 'regex:/^[a-zA-Z\s\']+$/'],
+            'email' => ['required', 'email', 'unique:users,email'],
+            'password' => ['required', 'string', 'min:6', 'max:12'], // Password confirmation rule
             'alamat' => ['required', 'string', 'min:15', 'max:50', 'regex:/^[a-zA-Z0-9\s\.,]+$/'],
             'pekerjaan' => ['required', 'string', 'min:5', 'max:20', 'regex:/^[a-zA-Z\s\']+$/'],
             'tgl_lahir' => ['required', 'date'],
@@ -72,33 +72,33 @@ class AuthController extends Controller
         ]);
 
         // Create token and send verification email
-        $token = $user->createToken('authToken')->plainTextToken;
-        $user->sendEmailVerification($token);
+        // $token = $user->createToken('authToken')->plainTextToken;
+        // $user->sendEmailVerification($token);
 
         // Send successful registration response without custom message
         return response()->json([
-            'message' => 'Registration successful. Please check your email for verification link.',
-            'token' => $token,
-        ], 201); // Created status code
+            'message' => 'Registration successful',
+        ], 200); // Created status code
     }
 
     public function logout(Request $request)
     {
         // Get the authenticated user
-        $user = $request->user();
-    
+        $user = Auth::user();
+
         // If user is logged in, revoke the token
         if ($user) {
             $user->tokens()->where('name', 'authToken')->delete();
+
             return response()->json([
                 'message' => 'Successfully logged out.',
             ], 200);
         }
-    
+
         // User is not logged in, return appropriate message
         return response()->json([
             'message' => 'User is not currently logged in.',
         ], 401); // Unauthorized status code
     }
-    
+
 }

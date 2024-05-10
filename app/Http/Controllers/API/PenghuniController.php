@@ -3,25 +3,28 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-use App\Models\Kamar;
-use App\Models\Kost;
 use App\Models\User;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+
 class PenghuniController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        $data = User::get();
+        $data = User::get()->where('role', '=', 'penyewa');
         $data = [
             'status' => 200,
             'user' => $data
         ];
         return response()->json($data, 200);
-        // return view('home');
     }
+
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -29,6 +32,7 @@ class PenghuniController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => ['required', 'string', 'min:6', 'max:255', 'regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/'],
             'alamat' => 'required|string|min:15|max:255',
+            'pekerjaan' => ['required', 'string', 'min:5', 'max:20', 'regex:/^[a-zA-Z\s\']+$/'],
             'tgl_lahir' => 'required|date',
             'no_hp' => ['required', 'string', 'max:15', 'regex:/^(08|\+62)\d{9,13}$/'],
             'jenis_kelamin' => 'required',
@@ -47,6 +51,7 @@ class PenghuniController extends Controller
             $user->password = bcrypt($request->password);
             $user->role = 'penyewa';
             $user->alamat = $request->alamat;
+            $user->pekerjaan = $request->pekerjaan;
             $user->tgl_lahir = $request->tgl_lahir;
             $user->no_hp = $request->no_hp;
             $user->jenis_kelamin = $request->jenis_kelamin;
@@ -58,8 +63,36 @@ class PenghuniController extends Controller
             ];
             return response()->json($data, 200);
         }
+
     }
-    public function update(Request $request, $id)
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        $dataUser = User::get()->where('id', '=', $id);
+
+
+        if ($dataUser->isEmpty()) {
+            $data = [
+                'status' => 404,
+                'user' => "Data tidak ditemukan"
+            ];
+            return response()->json($data, 404);
+        } else {
+            $data = [
+                'status' => 200,
+                'user' => $dataUser
+            ];
+            return response()->json($data, 200);
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|min:5|max:255',
@@ -96,9 +129,12 @@ class PenghuniController extends Controller
             return response()->json($data, 200);
         }
     }
-    public function destroy($id)
-    {
 
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
         $user = User::find($id);
         $user->delete();
         $data = [
@@ -106,4 +142,5 @@ class PenghuniController extends Controller
             'message' => 'Data sudah dihapus'
         ];
         return response()->json($data, 200);
-    }}
+    }
+}

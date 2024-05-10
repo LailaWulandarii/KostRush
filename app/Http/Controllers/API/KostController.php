@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 use App\Models\Kost;
 use App\Models\foto_kost;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class KostController extends Controller
 {
     public function index(Request $request)
     {
         // Ambil semua Kost dengan eager loading untuk FotoKost
-        $kosts = Kost::with('fotoKost')->get(); // Sesuaikan hubungan model jika diperlukan
+        $kosts = Kost::get(); // Sesuaikan hubungan model jika diperlukan
 
         // Periksa apakah ada Kost
         if ($kosts->isEmpty()) {
@@ -26,7 +27,7 @@ class KostController extends Controller
         $kostsTerformat = [];
         foreach ($kosts as $kost) {
             $kostTerformat = [
-                'id_kost' => $kost->id_kost,
+                'id_kost' => $kost->id,
                 'nama_kost' => $kost->nama_kost,
                 'alamat' => $kost->alamat,
                 'kecamatan' => $kost->kecamatan,
@@ -34,13 +35,13 @@ class KostController extends Controller
                 'fasilitas' => $kost->fasilitas,
                 'id_user' => $kost->id_user,
                 'tipe' => $kost->tipe,
-                'foto_kost' => $kost->fotoKost->map(function ($foto) {
-                    return [
-                        'id_foto_kost' => $foto->id_foto_kost,
-                        'id_kost' => $foto->id_kost,
-                        'foto_kost' => $foto->foto_kost, 
-                    ];
-                }),
+                // 'foto_kost' => $kost->fotoKost->map(function ($foto) {
+                //     return [
+                //         'id_foto_kost' => $foto->id_foto_kost,
+                //         'id_kost' => $foto->id_kost,
+                //         'foto_kost' => $foto->foto_kost, 
+                //     ];
+                // }),
             ];
             $kostsTerformat[] = $kostTerformat;
         }
@@ -70,7 +71,7 @@ class KostController extends Controller
         }
 
         // Filter Kosts by kecamatan
-        $kosts = Kost::where('kecamatan', $request->kecamatan)->with('fotoKost')->get();
+        $kosts = Kost::where('kecamatan', $request->kecamatan)->get();
 
         // Check if any Kosts match the filter
         if ($kosts->isEmpty()) {
@@ -83,7 +84,7 @@ class KostController extends Controller
         $filteredKosts = [];
         foreach ($kosts as $kost) {
             $filteredKost = [
-                'id_kost' => $kost->id_kost,
+                'id_kost' => $kost->id,
                 'nama_kost' => $kost->nama_kost,
                 'alamat' => $kost->alamat,
                 'kecamatan' => $kost->kecamatan,
@@ -91,13 +92,13 @@ class KostController extends Controller
                 'fasilitas' => $kost->fasilitas,
                 'id_user' => $kost->id_user,
                 'tipe' => $kost->tipe,
-                'foto_kost' => $kost->fotoKost->map(function ($foto) {
-                    return [
-                        'id_foto_kost' => $foto->id_foto_kost,
-                        'id_kost' => $foto->id_kost,
-                        'foto_kost' => $foto->foto_kost, 
-                    ];
-                }),
+                // 'foto_kost' => $kost->fotoKost->map(function ($foto) {
+                //     return [
+                //         'id_foto_kost' => $foto->id_foto_kost,
+                //         'id_kost' => $foto->id_kost,
+                //         'foto_kost' => $foto->foto_kost, 
+                //     ];
+                // }),
             ];
             $filteredKosts[] = $filteredKost;
         }
@@ -105,5 +106,17 @@ class KostController extends Controller
         return response()->json([
             'kosts' => $filteredKosts,
         ], 200); // OK status code
+    }
+
+    public function searchKost(Request $request){
+        $query = $request->input('query');
+        $encodedQuery = urldecode($query);
+
+        $dataKos = DB::table('kosts')->where('nama_kost', 'LIKE', '%'.$encodedQuery.'%')->get();
+        $data = [
+            'status' => 200,
+            'user' => $dataKos
+        ];
+        return response()->json($data, 200);
     }
 }
