@@ -4,22 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; // Tambahkan impor untuk Auth
-use App\Models\Kost; // Tambahkan impor untuk model Kost
-use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Kost;
 
 class KostController extends Controller
 {
-    public function create()
-    {
-        return view('pages.daftarKost');
-    }
     public function index()
     {
-        // Mengambil ID pengguna yang sedang login
         $id_user = Auth::id();
-
-        // Mengambil data kost berdasarkan ID pengguna yang sedang login
         $kost = Kost::where('id_user', $id_user)->first();
         return view('pages.kost', compact('kost'));
     }
@@ -32,7 +24,8 @@ class KostController extends Controller
             'peraturan' => ['required', 'string', 'min:5', 'max:70', 'regex:/^[a-zA-Z0-9\s\':.,\/!]+$/'],
             'alamat' => ['required', 'string', 'min:15', 'max:50', 'regex:/^[a-zA-Z0-9\s\.,]+$/'],
             'tipe' => ['required', 'string', 'in:putra,putri,campur'],
-            'kecamatan' => ['required', 'string', 'in:Bagor,Baron,Berbek,Gondang,Jatikalen,Kertosono,Lengkong,Loceret,Nganjuk,Ngetos,Ngluyu,Ngronggot,Pace,Patianrowo,Plemahan,Prambon,Rejoso,Sawahan,Sukomoro,Tanjunganom'],
+            'kecamatan' => ['required', 'string', 'in:Bagor,Baron,Berbek,Gondang,Jatikalen,Kertosono,Lengkong,
+            Loceret,Nganjuk,Ngetos,Ngluyu,Ngronggot,Pace,Patianrowo,Plemahan,Prambon,Rejoso,Sawahan,Sukomoro,Tanjunganom'],
         ];
 
         $messages = [

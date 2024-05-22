@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Validation\Rule;
@@ -7,8 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
@@ -49,8 +48,6 @@ class ProfileController extends Controller
 
         return redirect()->back()->with('success', 'Profil berhasil diperbarui');
     }
-
-
     public function changePassword(Request $request)
     {
 
@@ -69,27 +66,10 @@ class ProfileController extends Controller
         $request->validate($rules, $messages);
 
         $user = Auth::user();
-        // Memperbarui kata sandi baru menggunakan Query Builder
         DB::table('users')
             ->where('id', $user->id)
             ->update(['password' => Hash::make($request->new_password)]);
 
         return redirect()->back()->with('success', 'Kata sandi berhasil diperbarui.');
     }
-
-    // public function destroy($id)
-    // {
-    //     $user = User::findOrFail($id);
-    //     $user->delete();
-    //     return redirect()->route('home')->with('success', 'Akun berhasil dihapus!');
-    // }
-
-
-    // public function updatePassword()
-    // {
-    //     $userEmail = session('user_email');
-    //     $user = Auth::user();
-
-    //     return view('pages.profile', compact('user'));
-    // }
 }

@@ -2,10 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\User; // Impor model User
-use App\Models\Kamar; // Impor model User
-use App\Models\Transaksi; // Impor model Transaksi
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -75,16 +71,14 @@ class TransaksiController extends Controller
             ->where('transaksis.id_transaksi', $id_transaksi)
             ->value('kamars.status_kamar');
 
-        // Lakukan validasi
         if ($status_kamar !== 'kosong') {
-            return redirect()->back()->with('error', 'Status kamar tidak kosong. Transaksi tidak dapat diproses.');
+            return redirect()->back()->with('error', 'Status kamar tidak kosong. 
+            Transaksi tidak dapat diproses.');
         }
-        // Update status transaksi menjadi "diproses"
         DB::table('transaksis')
             ->where('id_transaksi', $id_transaksi)
             ->update(['status_transaksi' => 'diproses']);
 
-        // Update status kamar menjadi "dipesan"
         $id_kamar = DB::table('transaksis')
             ->where('id_transaksi', $id_transaksi)
             ->value('id_kamar');
@@ -92,34 +86,28 @@ class TransaksiController extends Controller
             ->where('id', $id_kamar)
             ->update(['status_kamar' => 'dipesan']);
 
-        // Redirect atau kembali ke halaman yang sesuai
         return redirect()->back();
     }
 
-    // Metode untuk memverifikasi transaksi
     public function verifikasiTransaksi($id_transaksi)
     {
-        // Ambil status kamar
         $status_kamar = DB::table('transaksis')
             ->join('kamars', 'transaksis.id_kamar', '=', 'kamars.id')
             ->where('transaksis.id_transaksi', $id_transaksi)
             ->value('kamars.status_kamar');
 
-        // Lakukan validasi
         if ($status_kamar !== 'dipesan') {
-            return redirect()->back()->with('error', 'Status kamar tidak dipesan. Transaksi tidak dapat diverifikasi.');
+            return redirect()->back()->with('error', 'Status kamar tidak dipesan. 
+            Transaksi tidak dapat diverifikasi.');
         }
-        // Update status transaksi menjadi "selesai"
         DB::table('transaksis')
             ->where('id_transaksi', $id_transaksi)
             ->update(['status_transaksi' => 'selesai']);
 
-        // Ambil ID user dan ID kamar dari data transaksi
         $transaksi = DB::table('transaksis')->where('id_transaksi', $id_transaksi)->first();
         $id_user = $transaksi->id;
         $id_kamar = $transaksi->id_kamar;
 
-        // Update status kamar menjadi "terisi" dan id_user
         DB::table('kamars')
             ->where('id', $id_kamar)
             ->update([
@@ -128,21 +116,17 @@ class TransaksiController extends Controller
                 'jumlah_sewa' => DB::raw('jumlah_sewa + 1')
             ]);
 
-        // Ambil id_kost dari tabel kosts
         $id_kost = DB::table('kamars')
             ->join('kosts', 'kamars.id_kost', '=', 'kosts.id')
             ->where('kamars.id', $id_kamar)
             ->value('kosts.id');
 
-        // Update id_kost dan id_kamar di tabel users
         DB::table('users')
             ->where('id', $id_user)
             ->update([
                 'id_kost' => $id_kost,
                 'id_kamar' => $id_kamar
             ]);
-
-        // Redirect atau kembali ke halaman yang sesuai
         return redirect()->back();
     }
 
@@ -169,7 +153,7 @@ class TransaksiController extends Controller
                 'kamars.nama_kamar'
             )
             ->where('transaksis.id_kost', $user->id_kost)
-            ->whereIn('transaksis.status_transaksi', ['selesai', 'diproses'])
+            ->whereIn('transaksis.status_transaksi', 'selesai')
             ->get();
 
         return view('pages.historyTransaksi', compact('transaksis'));
