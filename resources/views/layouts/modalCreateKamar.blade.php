@@ -74,16 +74,14 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="foto" class="form-label">Foto Kamar</label>
-                                <input class="form-control" id="foto" name="foto[]" type="file"
-                                    accept="image/*" multiple onchange="previewImages(event)" />
+                                <label for="foto_kamar" class="form-label">Foto Kamar</label>
+                                <input class="form-control" id="foto_kamar" name="foto_kamar" type="file"
+                                    accept="image/*" onchange="previewImages(event)" />
                                 <div style="display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 10px; width:200px"
                                     id="image-preview"></div>
-                                @if ($errors->has('foto.*'))
-                                    @foreach ($errors->get('foto.*') as $error)
-                                        <small>{{ $error[0] }}</small>
-                                    @endforeach
-                                @endif
+                                @error('foto_kamar')
+                                    <small>{{ $message }}</small>
+                                @enderror
                             </div>
                         </div>
                     </div>

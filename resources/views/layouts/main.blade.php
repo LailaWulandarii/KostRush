@@ -33,7 +33,7 @@
 
     <!-- Vendors CSS -->
     <link href="{{ asset('/asset/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/vendor/libs/apex-charts/apex-charts.css') }}" rel="stylesheet">
+    <link href="{{ asset('/asset/vendor/libs/apex-charts/apex-charts.css') }}" rel="stylesheet">
 
     <!-- Page CSS -->
 
@@ -43,6 +43,7 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('/asset/vendor/js/config.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>

@@ -1,6 +1,6 @@
 @foreach ($kamars as $kamar)
     <!-- MODAL HAPUS -->
-    <div class="modal fade" id="hapusKamar{{ $kamar->id_kamar }}" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="hapusKamar{{ $kamar->id }}" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -24,7 +24,7 @@
         </div>
     </div>
     <!-- MODAL SHOW -->
-    <div class="modal fade" id="showKamar{{ $kamar->id_kamar }}" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="showKamar{{ $kamar->id }}" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -32,10 +32,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="GET" action="{{ url('kamar/' . $kamar->id_kamar) }}">
+                    <form method="GET" action="{{ url('kamar/' . $kamar->id) }}">
                         @csrf
                         <div class="row">
-                            <!-- Menampilkan Nama Kamar -->
+                            <div class="mb-3">
+                                <img src="{{ asset($kamar->foto_kamar) }}" class="img-fluid"
+                                    style="max-width: 100%; max-height: 350px" alt="Foto Kamar">
+                            </div>
                             <div class="mb-3 col-md-8">
                                 <label class="form-label" for="nama_kamar">Nama Kamar</label>
                                 <div class="input-group input-group-merge">
@@ -45,7 +48,6 @@
                                         value="{{ old('nama_kamar', $kamar->nama_kamar) }}" />
                                 </div>
                             </div>
-                            <!-- Menampilkan Status Kamar -->
                             <div class="col-md">
                                 <label class="col-sm-2 col-form-label" for="basic-icon-default-company">Status</label>
                                 <div class="row">
@@ -67,7 +69,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Menampilkan Fasilitas Kamar -->
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="mb-3">
@@ -78,7 +79,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Menampilkan Harga Bulanan -->
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label class="form-label" for="harga">Harga Bulanan</label>
@@ -91,15 +91,6 @@
                                 </div>
                             </div>
                         </div>
-                        <br>
-                        {{-- // Menampilkan gambar-gambar tersebut dalam halaman web --}}
-                        <div>
-                            @foreach ($kamars as $kamar)
-                                <!-- Tampilkan gambar kamar -->
-                                <img src="                                {{ asset('storage/foto_kamar/'. $kamar->id_kamar) }} 
-                                " alt="Foto Kamar {{ $kamar->nama_kamar }}">
-                            @endforeach
-                        </div>
                     </form>
                 </div>
             </div>
@@ -107,18 +98,32 @@
     </div>
 
     <!-- MODAL UPDATE -->
-    {{-- <div class="modal fade" id="updateKamar{{ $kamar->id_kamar }}" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="updateKamar{{ $kamar->id }}" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalScrollableTitle">Edit Kamar</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('kamar.update', $kamar->id) }}" method="POST">
+                <form action="{{ route('kamar.update', $kamar->id) }}" enctype="multipart/form-data" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="modal-body">
                         <div class="row">
+                            <div class="mb-3">
+                                <img src="{{ asset($kamar->foto_kamar) }}" class="img-fluid"
+                                    style="max-width: 100%; max-height: 350px" alt="Foto Kamar">
+                            </div>
+                            <div class="mb-3">
+                                <label for="foto_kamar" class="form-label">Foto Kamar</label>
+                                <input class="form-control" id="foto_kamar" name="foto_kamar" type="file"
+                                    accept="image/*" onchange="previewImages(event)" />
+                                <div style="display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 10px; width:200px"
+                                    id="image-preview"></div>
+                                @error('foto_kamar')
+                                    <small>{{ $message }}</small>
+                                @enderror
+                            </div>
                             <div class="col-md-8">
                                 <label class="form-label" for="nama_kamar">Nama Kamar</label>
                                 <div class="input-group input-group-merge">
@@ -185,12 +190,13 @@
                         <div class="row mb-3">
                             <div class="col-sm-12 text-end">
                                 <button type="submit" class="btn btn-primary me-2">Simpan</button>
-                                <button type="reset" class="btn btn-outline-secondary">Reset</button>
+                                <button type="reset" class="btn btn-outline-secondary"
+                                    onclick="clearPreview()">Reset</button>
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-    </div> --}}
+    </div>
 @endforeach
