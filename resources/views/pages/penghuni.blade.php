@@ -34,10 +34,6 @@
                                         <button type="button" class="btn btn-icon btn-outline-primary tf-icons bx bx-show"
                                             data-bs-toggle="modal" data-bs-target="#showPenghuni{{ $p->id }}">
                                         </button>
-                                        {{-- <button type="button"
-                                            class="btn btn-icon btn-outline-primary tf-icons bx bx-edit-alt"
-                                            data-bs-toggle="modal" data-bs-target="#updatePenghuni{{ $p->id }}">
-                                        </button> --}}
                                     </td>
                                 </tr>
                                 <!-- MODAL SHOW -->
@@ -158,19 +154,6 @@
                                                                 <input class="form-control" name="tanggal_keluar"
                                                                     type="date" readonly
                                                                     value="{{ old('tanggal_keluar', $p->transaksis->first()->tanggal_keluar) }}" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="formFile" class="form-label">Foto KTP</label>
-                                                            <div class="row">
-                                                                <div class="col">
-                                                                    <button type="button" class="btn btn-primary">Lihat
-                                                                        Foto
-                                                                        KTP</button>
-                                                                    <button type="button" class="btn btn-primary">Unduh
-                                                                        Foto
-                                                                        KTP</button>
-                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -5,7 +5,7 @@
         <div class="container-xxl flex-grow-1 container-p-y">
             <!-- Hoverable Table rows -->
             <div class="card">
-                <h5 class="card-header">Data Transaksi</h5>
+                <h5 class="card-header">Data Transaksi Baru</h5>
                 @if ($transaksis->count() > 0)
                     <table class="table table-hover">
                         <thead>
@@ -35,6 +35,7 @@
                         </tbody>
                     </table>
                     @foreach ($transaksis as $t)
+                        {{-- Modal Show Detail --}}
                         <div class="modal fade" id="showTransaksiDetail{{ $t->id_transaksi }}" tabindex="-1"
                             aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">
@@ -98,27 +99,36 @@
                                                         value="{{ old('tgl_lahir', $t->tgl_lahir) }}" />
                                                 </div>
                                                 <div class="mb-2 col-md-6">
-                                                    <label class="form-label" for="foto_ktp">Foto KTP</label>
-                                                    <input type="text" class="form-control" id="foto_ktp"
-                                                        name="foto_ktp" readonly
-                                                        value="{{ old('foto_ktp', $t->foto_ktp) }}" />
+                                                    <label for="formFile" class="form-label">Foto KTP</label>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <button type="button" class="btn btn-primary"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#modalFotoKtp{{ $t->id_transaksi }}">Lihat
+                                                                Foto
+                                                                KTP</button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="mb-2 col-md-4">
-                                                    <label class="form-label" for="tanggal_masuk">Tanggal Masuk</label>
+                                                    <label class="form-label" for="tanggal_masuk">Tanggal
+                                                        Masuk</label>
                                                     <input type="date" class="form-control" id="tanggal_masuk"
                                                         name="tanggal_masuk" readonly
                                                         value="{{ old('tanggal_masuk', $t->tanggal_masuk) }}" />
                                                 </div>
                                                 <div class="mb-2 col-md-4">
-                                                    <label class="form-label" for="tanggal_keluar">Tanggal Keluar</label>
+                                                    <label class="form-label" for="tanggal_keluar">Tanggal
+                                                        Keluar</label>
                                                     <input type="date" class="form-control" id="tanggal_keluar"
                                                         name="tanggal_keluar" readonly
                                                         value="{{ old('tanggal_keluar', $t->tanggal_keluar) }}" />
                                                 </div>
                                                 <div class="mb-2 col-md-4">
-                                                    <label class="form-label" for="biaya">Total Biaya</label>
+                                                    <label class="form-label" for="biaya">Total
+                                                        Biaya</label>
                                                     <input type="number" class="form-control" id="biaya"
                                                         name="biaya" readonly value="{{ old('biaya', $t->biaya) }}" />
                                                 </div>
@@ -128,7 +138,6 @@
                                             <div class="col-sm-12 text-center">
                                                 <button type="submit" class="btn btn-primary">
                                                     Proses Transaksi
-                                                    <!-- Ubah teks tombol sesuai kebutuhan untuk transaksi baru -->
                                                 </button>
                                             </div>
                                         </div>
@@ -137,6 +146,27 @@
                             </div>
                         </div>
                     @endforeach
+
+                    <!-- Modal Foto KTP -->
+                    <div class="modal fade" id="modalFotoKtp{{ $t->id_transaksi }}" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Foto KTP</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="{{ asset($t->foto_ktp) }}" class="img-fluid"
+                                        style="max-width: 100%; max-height: 350px" alt="Foto KTP">
+                                </div>
+                                <div class="modal-footer d-grid">
+                                    <button type="button" class="btn btn-secondary " data-bs-toggle="modal"
+                                        data-bs-target="#showTransaksiDetail{{ $t->id_transaksi }}">Kembali</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 @else
                     <p>Tidak ada data transaksi yang tersedia.</p>
                 @endif

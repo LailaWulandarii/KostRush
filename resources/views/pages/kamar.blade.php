@@ -22,20 +22,19 @@
                                                 <a class="badge bg-label-success">Kosong</a>
                                             @endif
                                         </div>
-                                        <div class="d-flex "
-                                            style="display: flex; justify-content: space-around; ">
+                                        <div class="d-flex " style="display: flex; justify-content: space-around; ">
                                             <button type="button"
                                                 class="btn btn-icon btn-outline-primary tf-icons bx bx-show mx-1"
                                                 data-bs-toggle="modal" style="width: 42px"
-                                                data-bs-target="#showKamar{{ $kamar->id_kamar }}"></button>
+                                                data-bs-target="#showKamar{{ $kamar->id }}"></button>
                                             <button type="button"
                                                 class="btn btn-icon btn-outline-primary tf-icons bx bx-edit-alt mx-1"
                                                 data-bs-toggle="modal" style="width: 42px"
-                                                data-bs-target="#updateKamar{{ $kamar->id_kamar }}"></button>
+                                                data-bs-target="#updateKamar{{ $kamar->id }}"></button>
                                             <button type="button"
                                                 class="btn btn-icon btn-outline-primary tf-icons bx bx-trash mx-1"
                                                 style="width: 42px" data-bs-toggle="modal"
-                                                data-bs-target="#hapusKamar{{ $kamar->id_kamar }}">
+                                                data-bs-target="#hapusKamar{{ $kamar->id }}">
                                             </button>
                                         </div>
                                     </div>

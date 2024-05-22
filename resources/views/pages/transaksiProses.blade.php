@@ -5,7 +5,7 @@
         <div class="container-xxl flex-grow-1 container-p-y">
             <!-- Hoverable Table rows -->
             <div class="card">
-                <h5 class="card-header">Data Transaksi</h5>
+                <h5 class="card-header">Data Transaksi Diproses</h5>
                 @if ($transaksis->count() > 0)
                     <table class="table table-hover">
                         <thead>
@@ -44,9 +44,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <form
-                                    action="{{ route('verifikasi.transaksi', $t->id_transaksi) }}" 
-                                        method="POST">
+                                    <form action="{{ route('verifikasi.transaksi', $t->id_transaksi) }}" method="POST">
                                         @csrf
                                         @method('PUT')
                                         <div class="modal-body">
@@ -100,10 +98,16 @@
                                                         value="{{ old('tgl_lahir', $t->tgl_lahir) }}" />
                                                 </div>
                                                 <div class="mb-2 col-md-6">
-                                                    <label class="form-label" for="foto_ktp">Foto KTP</label>
-                                                    <input type="text" class="form-control" id="foto_ktp"
-                                                        name="foto_ktp" readonly
-                                                        value="{{ old('foto_ktp', $t->foto_ktp) }}" />
+                                                    <label for="formFile" class="form-label">Foto KTP</label>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <button type="button" class="btn btn-primary"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#modalFotoKtp{{ $t->id_transaksi }}">Lihat
+                                                                Foto
+                                                                KTP</button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -129,7 +133,7 @@
                                         <div class="row mb-4">
                                             <div class="col-sm-12 text-center">
                                                 <button type="submit" class="btn btn-primary">
-                                                    Verifikasi Transaksi <!-- Ubah teks tombol sesuai kebutuhan untuk transaksi baru -->
+                                                    Verifikasi Transaksi
                                                 </button>
                                             </div>
                                         </div>
@@ -138,6 +142,26 @@
                             </div>
                         </div>
                     @endforeach
+                    <!-- Modal Foto KTP -->
+                    <div class="modal fade" id="modalFotoKtp{{ $t->id_transaksi }}" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Foto KTP</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="{{ asset($t->foto_ktp) }}" class="img-fluid"
+                                        style="max-width: 100%; max-height: 350px" alt="Foto KTP">
+                                </div>
+                                <div class="modal-footer d-grid">
+                                    <button type="button" class="btn btn-secondary " data-bs-toggle="modal"
+                                        data-bs-target="#showTransaksiDetail{{ $t->id_transaksi }}">Kembali</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 @else
                     <p>Tidak ada data transaksi yang tersedia.</p>
                 @endif
