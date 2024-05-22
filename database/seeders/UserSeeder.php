@@ -16,16 +16,16 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'name' => 'Laila Wulandari',
-                'email' => 'lailawulandari@gmail.com',
-                'password' => Hash::make('laila123'),
+                'name' => 'Ananta Ghaisani',
+                'email' => 'ananta@gmail.com',
+                'password' => Hash::make('ananta123'),
                 'role' => 'penyewa',
                 'alamat' => 'Jl. Jalanan No. 2',
                 'pekerjaan' => 'Student',
                 'tgl_lahir' => '1995-01-01',
                 'no_hp' => '08987654321',
                 'jenis_kelamin' => 'perempuan',
-                'foto_ktp' => 'path/to/foto_ktp.jpg',
+                'foto_ktp' => 'foto_ktp/ktp1.png',
             ]
         ]);
     }
