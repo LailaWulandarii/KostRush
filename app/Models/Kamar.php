@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,7 +10,6 @@ use App\Models\Transaksi;
 class Kamar extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'nama_kamar',
         'harga',
@@ -22,15 +20,13 @@ class Kamar extends Model
         'jumlah_sewa',
         'foto_kamar',
     ];
-
     public function kost()
     {
         return $this->belongsTo(Kost::class, 'id_kost');
     }
-
     public function user()
     {
-        return $this->belongsTo(User::class, 'id_user'); // Sesuaikan dengan nama kunci asing yang sesuai
+        return $this->belongsTo(User::class, 'id_user'); 
     }
     public function transaksi()
     {

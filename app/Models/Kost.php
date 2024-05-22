@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,7 +10,6 @@ class Kost extends Model
 {
     use HasFactory;
     protected $table = 'kosts';
-
     protected $fillable = [
         'nama_kost',
         'alamat',
@@ -21,13 +19,9 @@ class Kost extends Model
         'tipe',
         'kecamatan',
     ];
-
-    protected $hidden = [
-        // ...
-    ];
     public function user()
     {
-        return $this->belongsTo(User::class, 'id_user'); // Sesuaikan 'id_user' dengan nama kolom yang benar
+        return $this->belongsTo(User::class, 'id_user'); 
     }
     public function kamars()
     {
