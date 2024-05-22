@@ -26,7 +26,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 Route::post('/apilogin', [AuthController::class, 'login']);
 Route::post('/apiregister', [AuthController::class, 'register']);
 Route::post('/apilogout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
-
+ 
 //Penghuni
 Route::apiResource('apipenghuni', PenghuniController::class);
 
